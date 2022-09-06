@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "zipgameday-6ef28",
+    "seniordesign_zip": "zipgameday-6ef28",
+    "test": "zip-master"
+  },
+  "targets": {}
+}
