@@ -1,34 +1,35 @@
 # Zip Gameday App
 
-A new Flutter project.
+uber. but for golf carts;
+## Resources
+---
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Flutter UI Builder](https://www.dhiwise.com/flutter)
 
 # Installation
 ---
 
 Change directory into the `zip-master3`
 
-### Install Flutter
+#### Software Requirements
+- [Install Flutter](https://docs.flutter.dev/get-started/install)
+- [Cocoa Pods Installation](https://guides.cocoapods.org/using/getting-started.html#installation)
 
-[Flutter Installation](https://docs.flutter.dev/get-started/install)
+#### Setup IOS Simulator
 
-### Install Cocoa Pods
+*Mac Instructions*
 
-[Cocoa Pods Installation](https://guides.cocoapods.org/using/getting-started.html#installation)
+In order to setup the iOS simulator first we have to install Xcode onto our computer, which can both be downloaded online or in the app store. After that we can configure the Xcode command-line tools to use our newly installed version with the following command typed into our console.
 
-### Create stable Flutter channel
+`sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`
+
+We can then open up the iOS simulator with the following command.
+
+`open -a Simulator`
+
+![simulator image](https://miro.medium.com/max/320/1*Q34htDxYW43DeC6d6W7mNg.gif)
+
+#### Create stable Flutter channel
 
 ```
 // set flutter to stable channel
@@ -45,14 +46,14 @@ Flutter channels:
 * stable
 ```
 
-### Flutter Version Management (FVM)
-
+#### Flutter Version Management (FVM)
+---
 Ensure Flutter Version Management (FVM) is installed
 
 `flutter pub global activate fvm`
 
 `dart pub global activate fvm`
-### Add FVM to Path
+#### Add FVM to Path
 
 The installation above will give you a suggestion to add the flutter config file to your path. The message will look something like this:
 
@@ -63,10 +64,28 @@ You can fix that by adding this to your shell's config file (.bashrc, .bash_prof
   export PATH="$PATH":"/opt/homebrew/Caskroom/flutter/3.0.5/flutter/.pub-cache/bin"
 ```
 
-### Install Flutter Version 1.22.5
-
+#### Install Flutter Version 1.22.5
 `fvm install 1.22.5`
 
-### Set Flutter Version to 1.22.5
+#### Set Flutter Version to 1.22.5
 
 `fvm use 1.22.5`
+
+#### Run IOS Simulator
+*On MacOS*
+
+`open -a Simulator`
+
+#### Install Packages with CocoaPod
+In the *zip-master3/ios* directory run
+
+`pod install`
+#### Run Flutter Install
+
+`fvm flutter run`
+
+*Output should look similar to this*
+```
+Launching lib/main.dart on iPhone SE (3rd generation) in debug mode...
+Running pod install...                                          
+```
