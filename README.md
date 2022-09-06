@@ -1,8 +1,7 @@
-# Zip Gameday App
+# Zip Gameday App 🚗
 
-uber. but for golf carts;
-## Resources
----
+uber. but for golf carts.
+#### Resources
 
 [Flutter UI Builder](https://www.dhiwise.com/flutter)
 
@@ -77,15 +76,30 @@ You can fix that by adding this to your shell's config file (.bashrc, .bash_prof
 `open -a Simulator`
 
 #### Install Packages with CocoaPod
-In the *zip-master3/ios* directory run
+In the `zip-master3/ios` directory run. This can take a long time.
 
-`pod install`
+`pod install --verbose`
 #### Run Flutter Install
+
+In `zip-master3` directory
 
 `fvm flutter run`
 
-*Output should look similar to this*
+*The output should be similar to this*
+
 ```
-Launching lib/main.dart on iPhone SE (3rd generation) in debug mode...
-Running pod install...                                          
+Launching lib/main.dart on iPhone 8 in debug mode...
+Running Xcode build...                                          
+Xcode build done.                                           14.1s
+Waiting for iPhone 8 to report its views...                          6ms
+Syncing files to device iPhone 8...                                309ms
+
+Flutter run key commands.
+r Hot reload. 🔥🔥🔥
+R Hot restart.
+h Repeat this help message.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+An Observatory debugger and profiler on iPhone 8 is available at: http://127.0.0.1:50900/E25X8NkTw1I=/
 ```

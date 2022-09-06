@@ -65,7 +65,7 @@ dev_dependencies:
   mockito: any
   rxdart:
   flutter_automation: any
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: any
 
 flutter_icons:
   android: "launcher_icon"
