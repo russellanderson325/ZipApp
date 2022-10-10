@@ -67,6 +67,13 @@ dev_dependencies:
   flutter_automation: any
   flutter_launcher_icons: any
 
+dependency_overrides:
+  mockito: any
+  flutter_test:
+    sdk: flutter
+  flutter_automation: any
+
+
 flutter_icons:
   android: "launcher_icon"
   ios: true
