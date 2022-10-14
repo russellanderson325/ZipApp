@@ -128,7 +128,7 @@ class _PromosScreenState extends State<PromosScreen> {
                   top: 10.0,
                   right: MediaQuery.of(context).size.width / 4,
                   left: MediaQuery.of(context).size.width / 4),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: _applyCode,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0)),
@@ -173,8 +173,8 @@ class _PromosScreenState extends State<PromosScreen> {
     ),
   );
 
-  final Icon _fireIcon =
-      Icon(CustomIcons.fire, size: 110.0, color: Color.fromRGBO(255, 242, 0, 1.0));
+  final Icon _fireIcon = Icon(CustomIcons.fire,
+      size: 110.0, color: Color.fromRGBO(255, 242, 0, 1.0));
 
   static final TextEditingController _promoController =
       new TextEditingController();

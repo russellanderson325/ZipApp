@@ -103,7 +103,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              FlatButton(
+                              TextButton(
                                 textColor: Colors.blue,
                                 child: Text('REQUEST REFUND'),
                                 //color: Colors.blue,

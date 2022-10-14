@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           stream: _uploadTask.events,
           builder: (_, snapshot) {
             var event = snapshot?.data?.snapshot;
-            double progress = ( event != null )
+            double progress = (event != null)
                 ? event.bytesTransferred / event.totalByteCount
                 : 0;
             return AlertDialog(
@@ -139,9 +139,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                                   //Use image_cropper for cropping
                                   //Need to build popup to choose
-                                  FlatButton(
-                                    splashColor:
-                                        Colors.black,
+                                  TextButton(
+                                    splashColor: Colors.black,
                                     onPressed: () {
                                       _takePicOrGalleryPopup();
                                     },
@@ -152,7 +151,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           width: 180.0,
                                           height: 180.0,
                                           child: user.profilePictureURL == ''
-                                              ? Image.asset('assets/profile_default.png')
+                                              ? Image.asset(
+                                                  'assets/profile_default.png')
                                               : Image.network(
                                                   user.profilePictureURL,
                                                   fit: BoxFit.fill,
@@ -170,7 +170,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: buildCards(
                                     context,
                                     Icon(Icons.person,
-                                        color: Color.fromRGBO(255, 242, 0, 1.0)),
+                                        color:
+                                            Color.fromRGBO(255, 242, 0, 1.0)),
                                     _firstname)),
                             Padding(
                                 padding: EdgeInsets.symmetric(
@@ -178,7 +179,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: buildCards(
                                     context,
                                     Icon(Icons.person,
-                                        color: Color.fromRGBO(255, 242, 0, 1.0)),
+                                        color:
+                                            Color.fromRGBO(255, 242, 0, 1.0)),
                                     _lastname)),
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -221,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         left:
                                             MediaQuery.of(context).size.width /
                                                 6),
-                                    child: FlatButton(
+                                    child: TextButton(
                                         onPressed: () async {
                                           try {
                                             await auth
@@ -331,7 +333,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   email: _email.text,
                   phone: _number.text,
                   home: _homeAddress.text);
-              
+
               setState(() {
                 _isEditing = false;
               });
@@ -513,7 +515,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 40.0, bottom: 15.0),
-                    child: CustomFlatButton(
+                    child: CustomTextButton(
                       title: "Take a picture",
                       fontSize: 18.0,
                       fontWeight: FontWeight.w700,
@@ -541,7 +543,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: CustomFlatButton(
+                    child: CustomTextButton(
                       title: "Choose a picture from photos",
                       fontSize: 18.0,
                       fontWeight: FontWeight.w700,
@@ -557,7 +559,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
-                    child: CustomFlatButton(
+                    child: CustomTextButton(
                       title: "Cancel",
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -576,7 +578,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         });
   }
-
 
 /*
   Takes picture from CAMERA using image picture package.
@@ -612,10 +613,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       });
     } catch (e) {
       _showErrorAlert(
-          title: "Upload photo failed",
-          content: e,
-          onPressed: _changeBlackVisible,
-        );
+        title: "Upload photo failed",
+        content: e,
+        onPressed: _changeBlackVisible,
+      );
     }
   }
 }

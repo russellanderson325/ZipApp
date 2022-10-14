@@ -87,7 +87,6 @@ class _MainScreenState extends State<MainScreen> {
   //bool _menuVisible;
   //bool termsSelect;
 
-
   ///maps api key used for the prediction
   final String map_key = "AIzaSyDsPh6P9PDFmOqxBiLXpzJ1sW4kx-2LN5g";
 
@@ -150,24 +149,21 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   //This method checks to see if the user in firebase has accepted the TC and Privacy Policy
-void _checkLegal() async {
+  void _checkLegal() async {
     //Calls the reference documents for all users
-  DocumentReference termsandConditionsReference =
-  _firestore.collection('users').doc(userService.user.uid);
-  bool acceptedTerms =
-  //calls the specifcic document of the users
-  (await termsandConditionsReference.get()).get('acceptedtc');
+    DocumentReference termsandConditionsReference =
+        _firestore.collection('users').doc(userService.user.uid);
+    bool acceptedTerms =
+        //calls the specifcic document of the users
+        (await termsandConditionsReference.get()).get('acceptedtc');
 
-  //If the terms and conditions is not accepted show the alert dialog
-  if (acceptedTerms == false) {
-
-  _termsAlert(context);
+    //If the terms and conditions is not accepted show the alert dialog
+    if (acceptedTerms == false) {
+      _termsAlert(context);
+    } else {
+      _showAlert(context);
+    }
   }
-  else {
-  _showAlert(context);
-  }
-
-}
 
   // user defined function
   void _privacyAlert(BuildContext context) {
@@ -181,7 +177,8 @@ void _checkLegal() async {
             " Privacy Policy for Mobile",
             style: TextStyle(color: Color.fromRGBO(255, 242, 0, 1.0)),
           ),
-          content: StatefulBuilder( builder:(BuildContext context, StateSetter setState) {
+          content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
             return SingleChildScrollView(
               child: Column(
                 //Row
@@ -224,16 +221,17 @@ void _checkLegal() async {
                           fontSize: 16.0,
                           fontFamily: "Bebas",
                           fontWeight: FontWeight.w600,
-                        )
-                    ),
+                        )),
                     controlAffinity: ListTileControlAffinity.platform,
                     value: checkBoxValue,
                     onChanged: (bool value) {
                       setState(() {
                         checkBoxValue = true;
-                        DocumentReference policyReference =
-                        _firestore.collection('users').doc(userService.user.uid);
-                        policyReference.update({'acceptedPrivPolicy': paccepted});
+                        DocumentReference policyReference = _firestore
+                            .collection('users')
+                            .doc(userService.user.uid);
+                        policyReference
+                            .update({'acceptedPrivPolicy': paccepted});
                       });
                     },
                     activeColor: Colors.white,
@@ -244,20 +242,23 @@ void _checkLegal() async {
             );
           }),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text("Next",
+            new TextButton(
+              child: new Text(
+                "Next",
               ),
               onPressed: () async {
                 DocumentReference termsandConditionsReference =
-                _firestore.collection('users').doc(userService.user.uid);
-                bool acceptedPolicy = (await termsandConditionsReference.get()).get('acceptedPrivPolicy');;
+                    _firestore.collection('users').doc(userService.user.uid);
+                bool acceptedPolicy = (await termsandConditionsReference.get())
+                    .get('acceptedPrivPolicy');
+                ;
                 if (acceptedPolicy == true) {
-                Navigator.of(context).pop();
-                _showAlert(context);
+                  Navigator.of(context).pop();
+                  _showAlert(context);
+                } else {
+                  null;
                 }
-                else {
-                null;
-                };
+                ;
               },
             ),
           ],
@@ -280,9 +281,10 @@ void _checkLegal() async {
             " Zip Terms & Conditions",
             style: TextStyle(color: Color.fromRGBO(255, 242, 0, 1.0)),
           ),
-            //This allows the state to be able to change in the alert dialog box
-            content: StatefulBuilder( builder:(BuildContext context, StateSetter setState) {
-              //Makes it so the text can be scrollable
+          //This allows the state to be able to change in the alert dialog box
+          content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+            //Makes it so the text can be scrollable
             return SingleChildScrollView(
               child: Column(
                 //Row
@@ -317,15 +319,15 @@ void _checkLegal() async {
                   ),
                   //The start of the checkbox
                   CheckboxListTile(
-                    title: Text("Click here to accept these Terms and Conditions?",
-                        softWrap: true,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                          fontFamily: "Bebas",
-                          fontWeight: FontWeight.w600,
-                        )
-                    ),
+                    title:
+                        Text("Click here to accept these Terms and Conditions?",
+                            softWrap: true,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontFamily: "Bebas",
+                              fontWeight: FontWeight.w600,
+                            )),
                     controlAffinity: ListTileControlAffinity.platform,
                     value: _checked,
                     // Changes the value when checked and set state updates the value on screen
@@ -333,9 +335,11 @@ void _checkLegal() async {
                       setState(() {
                         _checked = true;
                         DocumentReference termsandConditionsReference =
-                        _firestore.collection('users').doc(userService.user.uid);
-                        termsandConditionsReference.update({'acceptedtc': taccepted});
-
+                            _firestore
+                                .collection('users')
+                                .doc(userService.user.uid);
+                        termsandConditionsReference
+                            .update({'acceptedtc': taccepted});
                       });
                     },
                     activeColor: Colors.white,
@@ -346,20 +350,23 @@ void _checkLegal() async {
             );
           }),
           actions: <Widget>[
-            new FlatButton(
-              child: new Text("Next",
-            ),
+            new TextButton(
+              child: new Text(
+                "Next",
+              ),
               onPressed: () async {
                 DocumentReference termsandConditionsReference =
-                _firestore.collection('users').doc(userService.user.uid);
-                    bool acceptedTerms = (await termsandConditionsReference.get()).get('acceptedtc');;
-                    if (acceptedTerms == true) {
-                      Navigator.of(context).pop();
-                      _privacyAlert(context);
-                    }
-                    else {
-                      null;
-                    };
+                    _firestore.collection('users').doc(userService.user.uid);
+                bool acceptedTerms =
+                    (await termsandConditionsReference.get()).get('acceptedtc');
+                ;
+                if (acceptedTerms == true) {
+                  Navigator.of(context).pop();
+                  _privacyAlert(context);
+                } else {
+                  null;
+                }
+                ;
               },
             ),
           ],
@@ -401,7 +408,7 @@ void _checkLegal() async {
           ),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
-            new FlatButton(
+            new TextButton(
               child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -434,26 +441,23 @@ void _checkLegal() async {
           Align(
             alignment: Alignment.topLeft,
             child: SafeArea(
-              child: Stack(children: <Widget> [
-                // Visibility(
-                // visible: _menuVisible,
-                // child:
-                Card(
+                child: Stack(children: <Widget>[
+              // Visibility(
+              // visible: _menuVisible,
+              // child:
+              Card(
                   color: Colors.transparent,
                   elevation: 100,
                   child: IconButton(
-                    iconSize: 44,
-                    color: Color.fromRGBO(255, 242, 0, 1.0),
-                    icon: Icon(Icons.menu),
-                    onPressed: () => _scaffoldKey.currentState.openDrawer())
-                )
-
-              ])
-            ),
+                      iconSize: 44,
+                      color: Color.fromRGBO(255, 242, 0, 1.0),
+                      icon: Icon(Icons.menu),
+                      onPressed: () => _scaffoldKey.currentState.openDrawer()))
+            ])),
           ),
           Visibility(
               visible: showDropPin,
-              child: Stack(children: <Widget> [
+              child: Stack(children: <Widget>[
                 // Align(
                 //   alignment: Alignment.topLeft,
                 //   child: SafeArea(
@@ -464,18 +468,18 @@ void _checkLegal() async {
                 //   ),
                 // ),
                 Center(
-                  //alignment: Alignment.center,
-                  child: Icon(
-                    Icons.push_pin,
-                    color: Colors.white,
-                    size: 55,
-                  ))
-                ])
-              )
+                    //alignment: Alignment.center,
+                    child: Icon(
+                  Icons.push_pin,
+                  color: Colors.white,
+                  size: 55,
+                ))
+              ]))
         ]),
         drawer: buildDrawer(context),
         bottomSheet: _buildBottomSheet());
   }
+
 // Positioned(
 //                   top: 70,
 //                   bottom: 100,
@@ -586,7 +590,6 @@ void _checkLegal() async {
                                       setState(() {
                                         bottomSheetStatus =
                                             BottomSheetStatus.welcome;
-                                        
                                       });
                                     }
                                     search_node.unfocus();
@@ -611,7 +614,6 @@ void _checkLegal() async {
                                     ),
                                   ),
                                   hintText: "Search Destination",
-                                  
                                   border: InputBorder.none,
                                   contentPadding:
                                       EdgeInsets.only(left: 15.0, top: 16.0),
@@ -712,8 +714,6 @@ void _checkLegal() async {
                                   return null;
                                 });
                               },
-                              
-
                               controller: search_controller,
                               focusNode: search_node,
                               textInputAction: TextInputAction.go,
@@ -738,9 +738,7 @@ void _checkLegal() async {
                               ))),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(5)
-                  ),
+                  Padding(padding: EdgeInsets.all(5)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -752,7 +750,8 @@ void _checkLegal() async {
                               minimumSize: Size(84, 40)),
                           onPressed: () async {
                             pinDropDestination = true;
-                            this.pinDestination = mapScaffoldKey.currentState._getPinDrop();
+                            this.pinDestination =
+                                mapScaffoldKey.currentState._getPinDrop();
                             print(pinDestination);
                             _pickSize();
                           })
@@ -962,8 +961,6 @@ void _checkLegal() async {
     });
   }
 
-
-  
   ///this will pull up the bottomsheet and ask if the user what
   ///size cart they want
   void _pickSize() async {
@@ -981,16 +978,16 @@ void _checkLegal() async {
     double length;
     if (pinDropDestination) {
       length = await Geolocator().distanceBetween(
-        locationService.position.latitude,
-        locationService.position.longitude,
-        this.pinDestination.latitude,
-        this.pinDestination.longitude);
-    }else {
+          locationService.position.latitude,
+          locationService.position.longitude,
+          this.pinDestination.latitude,
+          this.pinDestination.longitude);
+    } else {
       length = await Geolocator().distanceBetween(
-        locationService.position.latitude,
-        locationService.position.longitude,
-        this.details.result.geometry.location.lat,
-        this.details.result.geometry.location.lng);
+          locationService.position.latitude,
+          locationService.position.longitude,
+          this.details.result.geometry.location.lat,
+          this.details.result.geometry.location.lng);
     }
     // convert meters to miles
     length = length * 0.000621371;
@@ -1008,7 +1005,8 @@ void _checkLegal() async {
         (await currentRidesReference.get()).get('ridesGoingNow');
 
     if (search_controller.text == this.address &&
-        search_controller.text.length > 0 || pinDropDestination == true) {
+            search_controller.text.length > 0 ||
+        pinDropDestination == true) {
       double length = await this._rideDistance(pinDropDestination);
       price =
           await paymentService.getAmmount(zipxl, length, currentNumberOfRides);
@@ -1022,11 +1020,10 @@ void _checkLegal() async {
   ///for a driver
   void _lookForRide() async {
     print(rideService.ride);
-    if (this.pinDropDestination)  {
-      rideService.startRide(this.pinDestination.latitude, this.pinDestination.longitude,
-        this.onRideChange, price);
-    }
-    else if (this.details != null) {
+    if (this.pinDropDestination) {
+      rideService.startRide(this.pinDestination.latitude,
+          this.pinDestination.longitude, this.onRideChange, price);
+    } else if (this.details != null) {
       rideService.startRide(this.details.result.geometry.location.lat,
           this.details.result.geometry.location.lng, this.onRideChange, price);
     }
@@ -1362,8 +1359,6 @@ class MapScreen extends State<TheMap> {
               icon: pinLocationIcon));*/
     });
   }
-
-
 
   ///this sets the icon for the markers
   void _setCustomMapPin() async {

@@ -91,7 +91,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
           ),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
-            new FlatButton(
+            new TextButton(
               child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -135,7 +135,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
 
-            new FlatButton(
+            new TextButton(
                 child: new Text("OVERRIDE",
                     style: TextStyle(
                         color: Colors.red,
@@ -143,7 +143,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                         fontWeight: FontWeight.w700)),
                 onPressed: () async =>
                     {Navigator.of(context).pop(), _overrideDriver()}),
-            new FlatButton(
+            new TextButton(
               child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -187,7 +187,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
 
-            new FlatButton(
+            new TextButton(
               child: new Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -213,14 +213,14 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
           ),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
-            new FlatButton(
+            new TextButton(
               child: new Text("ZipX"),
               onPressed: () async {
                 Navigator.of(context).pop();
                 await driverService.startDriving(updateUI);
               },
             ),
-            new FlatButton(
+            new TextButton(
               child: new Text("ZipXL"),
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -252,137 +252,133 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
         print(driverObject.toString());
         if (driverObject.hasData) {
           return Scaffold(
-
-            key: _scaffoldKey,
-            backgroundColor: Colors.black,
-            body: Stack(
-              children: <Widget>[
-                //Uses Enum to determine which view to build.
-                driverBottomSheetStatus == DriverBottomSheetStatus.confirmation
-                    ? _buildMapView()
-                    : TheMap(),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: SafeArea(
-                  child: Stack(children: <Widget> [
-                    Card(
-                      color: Colors.transparent,
-                      elevation: 100,
-                      child: IconButton(
-                        iconSize: 44,
-                        color: Color.fromRGBO(255, 242, 0, 1.0),
-                        icon: Icon(Icons.menu),
-                        onPressed: () => _scaffoldKey.currentState.openDrawer())
-                    )
-                    ])
+              key: _scaffoldKey,
+              backgroundColor: Colors.black,
+              body: Stack(
+                children: <Widget>[
+                  //Uses Enum to determine which view to build.
+                  driverBottomSheetStatus ==
+                          DriverBottomSheetStatus.confirmation
+                      ? _buildMapView()
+                      : TheMap(),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: SafeArea(
+                        child: Stack(children: <Widget>[
+                      Card(
+                          color: Colors.transparent,
+                          elevation: 100,
+                          child: IconButton(
+                              iconSize: 44,
+                              color: Color.fromRGBO(255, 242, 0, 1.0),
+                              icon: Icon(Icons.menu),
+                              onPressed: () =>
+                                  _scaffoldKey.currentState.openDrawer()))
+                    ])),
                   ),
-                ),
-              ],
-            ),
-            drawer: _buildDrawer(context),
-            bottomSheet: _buildBottomSheet(),
-            //If bottomsheet is closed -> display Drive button
+                ],
+              ),
+              drawer: _buildDrawer(context),
+              bottomSheet: _buildBottomSheet(),
+              //If bottomsheet is closed -> display Drive button
 
-            //comenting out this sets it in center but do we still want this without drive button
-            // floatingActionButtonLocation:
-            //     driverBottomSheetStatus != DriverBottomSheetStatus.closed
-            //         ? null
-            //         : FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: driverBottomSheetStatus !=
-                    DriverBottomSheetStatus.closed
-                ? null
-                :
-                // Container(
-                //    alignment: Alignment.bottomRight,
-                //    height: screenHeight * 0.25,
-                //    width: screenWidth * 0.25,
-                //    padding: EdgeInsets.only(bottom: 20.0),
-                //    color: Colors.transparent,
-                //    child:
-                SafeArea (
-                  child: 
-                SpeedDial(
-                    marginEnd: 18,
-                    marginBottom: 20,
-                    icon: MyFlutterApp.golfCart,
-                    activeIcon: Icons.close,
-                    buttonSize: 60.0,
-                    visible: true,
-                    iconTheme: IconThemeData(color: Colors.black, size: 25),
+              //comenting out this sets it in center but do we still want this without drive button
+              // floatingActionButtonLocation:
+              //     driverBottomSheetStatus != DriverBottomSheetStatus.closed
+              //         ? null
+              //         : FloatingActionButtonLocation.centerDocked,
+              floatingActionButton: driverBottomSheetStatus !=
+                      DriverBottomSheetStatus.closed
+                  ? null
+                  :
+                  // Container(
+                  //    alignment: Alignment.bottomRight,
+                  //    height: screenHeight * 0.25,
+                  //    width: screenWidth * 0.25,
+                  //    padding: EdgeInsets.only(bottom: 20.0),
+                  //    color: Colors.transparent,
+                  //    child:
+                  SafeArea(
+                      child: SpeedDial(
+                        marginEnd: 18,
+                        marginBottom: 20,
+                        icon: MyFlutterApp.golfCart,
+                        activeIcon: Icons.close,
+                        buttonSize: 60.0,
+                        visible: true,
+                        iconTheme: IconThemeData(color: Colors.black, size: 25),
 
-                    /// If true user is forced to close dial manually
-                    /// by tapping main button and overlay is not rendered.
-                    closeManually: false,
+                        /// If true user is forced to close dial manually
+                        /// by tapping main button and overlay is not rendered.
+                        closeManually: false,
 
-                    /// If true overlay will render no matter what.
-                    renderOverlay: false,
-                    useRotationAnimation: false,
-                    tooltip: 'Speed Dial',
-                    heroTag: 'speed-dial-hero-tag',
-                    backgroundColor: Color.fromRGBO(255, 242, 0, 1.0),
-                    foregroundColor: Colors.transparent,
-                    elevation: 8.0,
-                    overlayOpacity: 0,
-                    //overlayColor: Colors.transparent,
-                    shape: CircleBorder(),
-                    // orientation: SpeedDialOrientation.Up,
-                    // childMarginBottom: 2,
-                    // childMarginTop: 2,
-                    children: [
-                      SpeedDialChild(
-                        child: new Icon(MdiIcons.clockIn, color: Colors.black),
-                        backgroundColor: Colors.grey[300],
-                        label: 'Clock In',
-                        labelStyle: TextStyle(fontSize: 17.0),
-                        onTap: () async {
-                          List result = await driverService.clockIn();
-                          //[message, override]
-                          if (result[1])  {
-                            _overrideAlert(context, result[0]);
-                          }else {
-                          _driverAlert(context, result[0], result[1]);
-                          await driverService.startDriving(updateUI);
-                          }
-                          
-                          
-                        },
+                        /// If true overlay will render no matter what.
+                        renderOverlay: false,
+                        useRotationAnimation: false,
+                        tooltip: 'Speed Dial',
+                        heroTag: 'speed-dial-hero-tag',
+                        backgroundColor: Color.fromRGBO(255, 242, 0, 1.0),
+                        foregroundColor: Colors.transparent,
+                        elevation: 8.0,
+                        overlayOpacity: 0,
+                        //overlayColor: Colors.transparent,
+                        shape: CircleBorder(),
+                        // orientation: SpeedDialOrientation.Up,
+                        // childMarginBottom: 2,
+                        // childMarginTop: 2,
+                        children: [
+                          SpeedDialChild(
+                            child:
+                                new Icon(MdiIcons.clockIn, color: Colors.black),
+                            backgroundColor: Colors.grey[300],
+                            label: 'Clock In',
+                            labelStyle: TextStyle(fontSize: 17.0),
+                            onTap: () async {
+                              List result = await driverService.clockIn();
+                              //[message, override]
+                              if (result[1]) {
+                                _overrideAlert(context, result[0]);
+                              } else {
+                                _driverAlert(context, result[0], result[1]);
+                                await driverService.startDriving(updateUI);
+                              }
+                            },
+                          ),
+                          SpeedDialChild(
+                            child: new Icon(MdiIcons.clockOut,
+                                color: Colors.black),
+                            backgroundColor: Colors.grey[300],
+                            label: 'Clock Out',
+                            labelStyle: TextStyle(fontSize: 17.0),
+                            onTap: () async {
+                              String message = await driverService.clockOut();
+                              _driverAlert(context, message, false);
+                            },
+                          ),
+                          SpeedDialChild(
+                            child: new Icon(MdiIcons.play, color: Colors.black),
+                            backgroundColor: Colors.grey[300],
+                            label: 'Start Break',
+                            labelStyle: TextStyle(fontSize: 17.0),
+                            onTap: () async {
+                              String message = await driverService.startBreak();
+                              _driverAlert(context, message, false);
+                            },
+                          ),
+                          SpeedDialChild(
+                            child:
+                                new Icon(MdiIcons.pause, color: Colors.black),
+                            backgroundColor: Colors.grey[300],
+                            label: 'End Break',
+                            labelStyle: TextStyle(fontSize: 17.0),
+                            onTap: () async {
+                              String message = await driverService.endBreak();
+                              _driverAlert(context, message, false);
+                            },
+                          ),
+                        ],
                       ),
-                      SpeedDialChild(
-                        child: new Icon(MdiIcons.clockOut, color: Colors.black),
-                        backgroundColor: Colors.grey[300],
-                        label: 'Clock Out',
-                        labelStyle: TextStyle(fontSize: 17.0),
-                        onTap: () async {
-                          String message = await driverService.clockOut();
-                          _driverAlert(context, message, false);
-                        },
-                      ),
-                      SpeedDialChild(
-                        child: new Icon(MdiIcons.play, color: Colors.black),
-                        backgroundColor: Colors.grey[300],
-                        label: 'Start Break',
-                        labelStyle: TextStyle(fontSize: 17.0),
-                        onTap: () async {
-                          String message = await driverService.startBreak();
-                          _driverAlert(context, message, false);
-                        },
-                      ),
-                      SpeedDialChild(
-                        child: new Icon(MdiIcons.pause, color: Colors.black),
-                        backgroundColor: Colors.grey[300],
-                        label: 'End Break',
-                        labelStyle: TextStyle(fontSize: 17.0),
-                        onTap: () async {
-                          String message = await driverService.endBreak();
-                          _driverAlert(context, message, false);
-                        },
-                      ),
-                    ],
-                  ),
-                )
-
-          );
-
+                    ));
         } else {
           print("no driver data :((( ");
           return Scaffold(
@@ -802,17 +798,16 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                   MaterialPageRoute(builder: (context) => EarningsScreen()));
             },
           ),
-
           ListTile(
             title: Text('Driver History Screen'),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DriverHistoryScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DriverHistoryScreen()));
             },
           ),
-
-
           ListTile(
             title: Text('Account Settings'),
             onTap: () {
@@ -823,14 +818,12 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                       builder: (context) => DriverSettingsScreen()));
             },
           ),
-           ListTile(
+          ListTile(
             title: Text('Payment Settings'),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>StripeScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => StripeScreen()));
             },
           ),
           ListTile(
