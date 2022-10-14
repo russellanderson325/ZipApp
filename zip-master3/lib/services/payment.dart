@@ -38,7 +38,7 @@ class _PaymentState extends State<Payment> {
   }
 
   void setError(dynamic error) {
-    _scaffoldKey.currentState
+    ScaffoldMessenger.of(currentState)
         .showSnackBar(SnackBar(content: Text(error.toString())));
     setState(() {
       _error = error.toString();
@@ -355,7 +355,7 @@ class _PaymentState extends State<Payment> {
                 StripePayment.paymentRequestWithCardForm(
                         CardFormPaymentRequest())
                     .then((paymentMethod) {
-                  _scaffoldKey.currentState.showSnackBar(
+                  ScaffoldMessenger.of(currentState).showSnackBar(
                       SnackBar(content: Text('Received ${paymentMethod.id}')));
                   setState(() {
                     //_getCustomer();

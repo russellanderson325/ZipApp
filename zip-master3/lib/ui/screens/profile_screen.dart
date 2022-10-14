@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ? Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 20.0, horizontal: 10.0),
-                            child: RaisedButton(
+                            child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
                                   _uploadTask = null;
@@ -325,7 +325,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: RaisedButton(
+          child: ElevatedButton(
             onPressed: () async {
               await _editInfo(
                   firstname: _firstname.text,
@@ -354,7 +354,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-          child: RaisedButton(
+          child: ElevatedButton(
             onPressed: () {
               setState(() {
                 //reset all textEditing Controllers.

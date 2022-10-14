@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:zip/CustomIcons/custom_icons_icons.dart';
 
 class GoogleButton extends StatelessWidget {
-  
-final VoidCallback onPressed;
+  final VoidCallback onPressed;
 
-GoogleButton({this.onPressed});
+  GoogleButton({this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       elevation: 1.0,
       onPressed: onPressed,
       color: Colors.white,
       splashColor: Colors.black12,
       child: Container(
         width: 225.0,
-        height: 40.0, 
+        height: 40.0,
         child: Row(
           children: <Widget>[
             Icon(CustomIcons.google, color: Colors.red),

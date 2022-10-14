@@ -415,7 +415,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                     fontWeight: FontWeight.w400,
                     fontSize: 22.0,
                     fontFamily: "Bebas")),
-            RaisedButton(
+            ElevatedButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
@@ -652,7 +652,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  RaisedButton.icon(
+                  ElevatedButton.icon(
                     icon: Icon(Icons.check, color: Colors.white),
                     elevation: 1.0,
                     color: Color.fromRGBO(76, 86, 96, 1.0),
@@ -668,7 +668,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                       await driverService.acceptRequest(currentRequest.id);
                     },
                   ),
-                  RaisedButton.icon(
+                  ElevatedButton.icon(
                     icon: Icon(Icons.cancel),
                     elevation: 1.0,
                     color: Colors.white,

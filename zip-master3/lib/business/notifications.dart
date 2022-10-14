@@ -35,7 +35,7 @@ class NotificationService {
         print("onMessage: $message");
 
         // Configure this if block to allow showing notifications as snackbar
-        if (false) {
+        /*    if (false) {
           final snackbar = SnackBar(
               content: Text(message['notification']['title']),
               action: SnackBarAction(
@@ -43,8 +43,8 @@ class NotificationService {
                   onPressed: () {
                     // Go to new page here or do something in a service etc
                   }));
-          Scaffold.of(currentContext).showSnackBar(snackbar);
-        }
+          ScaffoldMessenger.of(currentContext).showSnackBar(snackbar);
+        } */
 
         showDialog(
           context: currentContext,
