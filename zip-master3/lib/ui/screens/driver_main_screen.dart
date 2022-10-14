@@ -416,9 +416,10 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                     fontSize: 22.0,
                     fontFamily: "Bebas")),
             ElevatedButton(
-              shape: RoundedRectangleBorder(
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
-              ),
+              )),
               onPressed: () {
                 driverService.stopDriving();
               },
@@ -428,7 +429,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
         ));
   }
 
-/*
+/* 
   If bottomSheet has found a ride -> show preview of route inside application. 
 */
   Widget _buildMapView() {
@@ -443,7 +444,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
     );
   }
 
-/*
+/* 
   Controls the state of the bottomSheet.
   Constantly listens to a request stream to check for changes.
 */
