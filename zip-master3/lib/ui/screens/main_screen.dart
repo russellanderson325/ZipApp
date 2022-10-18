@@ -925,10 +925,11 @@ class _MainScreenState extends State<MainScreen> {
                         fontSize: 22.0,
                         fontFamily: "Bebas")),
                 ElevatedButton(
-                  color: Color.fromRGBO(255, 242, 0, 1.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(255, 242, 0, 1.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      )),
                   onPressed: () {
                     _cancelRide();
                   },

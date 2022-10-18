@@ -655,10 +655,11 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                 children: <Widget>[
                   ElevatedButton.icon(
                     icon: Icon(Icons.check, color: Colors.white),
-                    elevation: 1.0,
-                    color: Color.fromRGBO(76, 86, 96, 1.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0)),
+                    style: ElevatedButton.styleFrom(
+                        elevation: 1.0,
+                        backgroundColor: Color.fromRGBO(76, 86, 96, 1.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0))),
                     label: Text(
                       "Accept",
                       style: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -671,11 +672,12 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                   ),
                   ElevatedButton.icon(
                     icon: Icon(Icons.cancel),
-                    elevation: 1.0,
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.black38),
-                        borderRadius: BorderRadius.circular(12.0)),
+                    style: ElevatedButton.styleFrom(
+                        elevation: 1.0,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.black38),
+                            borderRadius: BorderRadius.circular(12.0))),
                     label: Text(
                       "Decline",
                       style: TextStyle(
