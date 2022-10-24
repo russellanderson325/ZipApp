@@ -130,9 +130,10 @@ class _PromosScreenState extends State<PromosScreen> {
                   left: MediaQuery.of(context).size.width / 4),
               child: TextButton(
                 onPressed: _applyCode,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0)),
-                color: Colors.white,
+                style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0)),
+                    color: Colors.white),
                 child: Text(
                   "Apply",
                   softWrap: true,
