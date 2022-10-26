@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomFlatButton extends StatelessWidget {
+class CustomTextButton extends StatelessWidget {
   final String title;
   final Color textColor;
   final double fontSize;
@@ -11,7 +11,7 @@ class CustomFlatButton extends StatelessWidget {
   final Color borderColor;
   final double borderWidth;
 
-  CustomFlatButton(
+  CustomTextButton(
       {this.title,
       this.textColor,
       this.fontSize,
@@ -24,7 +24,7 @@ class CustomFlatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: onPressed,
       color: color,
       splashColor: splashColor,
@@ -54,8 +54,7 @@ class CustomFlatButton extends StatelessWidget {
   }
 }
 
-class CustomFlatButtonWithUnderline extends StatelessWidget
-{
+class CustomTextButtonWithUnderline extends StatelessWidget {
   final String title;
   final Color textColor;
   final double fontSize;
@@ -66,7 +65,7 @@ class CustomFlatButtonWithUnderline extends StatelessWidget
   final Color borderColor;
   final double borderWidth;
 
-  CustomFlatButtonWithUnderline(
+  CustomTextButtonWithUnderline(
       {this.title,
       this.textColor,
       this.fontSize,
@@ -79,7 +78,7 @@ class CustomFlatButtonWithUnderline extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: onPressed,
       color: color,
       splashColor: splashColor,

@@ -415,10 +415,11 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                     fontWeight: FontWeight.w400,
                     fontSize: 22.0,
                     fontFamily: "Bebas")),
-            RaisedButton(
-              shape: RoundedRectangleBorder(
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
-              ),
+              )),
               onPressed: () {
                 driverService.stopDriving();
               },
@@ -428,7 +429,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
         ));
   }
 
-/*
+/* 
   If bottomSheet has found a ride -> show preview of route inside application. 
 */
   Widget _buildMapView() {
@@ -443,7 +444,7 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
     );
   }
 
-/*
+/* 
   Controls the state of the bottomSheet.
   Constantly listens to a request stream to check for changes.
 */
@@ -652,12 +653,13 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  RaisedButton.icon(
+                  ElevatedButton.icon(
                     icon: Icon(Icons.check, color: Colors.white),
-                    elevation: 1.0,
-                    color: Color.fromRGBO(76, 86, 96, 1.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0)),
+                    style: ElevatedButton.styleFrom(
+                        elevation: 1.0,
+                        backgroundColor: Color.fromRGBO(76, 86, 96, 1.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0))),
                     label: Text(
                       "Accept",
                       style: TextStyle(color: Colors.white, fontSize: 16.0),
@@ -668,13 +670,14 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                       await driverService.acceptRequest(currentRequest.id);
                     },
                   ),
-                  RaisedButton.icon(
+                  ElevatedButton.icon(
                     icon: Icon(Icons.cancel),
-                    elevation: 1.0,
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.black38),
-                        borderRadius: BorderRadius.circular(12.0)),
+                    style: ElevatedButton.styleFrom(
+                        elevation: 1.0,
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.black38),
+                            borderRadius: BorderRadius.circular(12.0))),
                     label: Text(
                       "Decline",
                       style: TextStyle(

@@ -43,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 top: MediaQuery.of(context).size.height / 10,
                 left: MediaQuery.of(context).size.width / 10,
                 right: MediaQuery.of(context).size.width / 10),
-            child: CustomFlatButton(
+            child: CustomTextButton(
                 title: "Log In",
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
@@ -60,7 +60,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40.0),
-            child: CustomFlatButton(
+            child: CustomTextButton(
               title: "Sign Up",
               fontSize: 22,
               fontWeight: FontWeight.w700,
@@ -80,7 +80,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 onPressed: () {
                   authLogin(AuthService().googleSignIn(), context);
                   Navigator.of(context).pushNamed("/main");
-
                 },
               ),
             ),

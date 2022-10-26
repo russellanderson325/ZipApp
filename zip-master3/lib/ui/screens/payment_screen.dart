@@ -198,7 +198,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   void setError(dynamic error) {
-    _scaffoldKey.currentState
+    //_scaffoldKey.currentState
+    ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(error.toString())));
     setState(() {
       _error = error.toString();

@@ -82,7 +82,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20.0, horizontal: 40.0),
-                      child: CustomFlatButton(
+                      child: CustomTextButton(
                         title: "Log In",
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -118,7 +118,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           bottom: 20.0,
                           left: 10.0,
                           right: 0.0),
-                      child: CustomFlatButtonWithUnderline(
+                      child: CustomTextButtonWithUnderline(
                         title: "Not a driver?",
                         textColor: Color.fromRGBO(255, 242, 0, 1.0),
                         fontSize: 18.0,

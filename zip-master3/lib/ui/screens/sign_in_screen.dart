@@ -97,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20.0, horizontal: 40.0),
-                      child: CustomFlatButton(
+                      child: CustomTextButton(
                         title: "Log In",
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -117,7 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Padding(
                       padding: EdgeInsets.only(
                           top: 10.0, bottom: 20.0, left: 10.0, right: 0.0),
-                      child: CustomFlatButton(
+                      child: CustomTextButton(
                         title: "Forgot Password?",
                         textColor: Color.fromRGBO(255, 242, 0, 1.0),
                         fontSize: 18.0,
@@ -148,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           bottom: 20.0,
                           left: 10.0,
                           right: 0.0),
-                      child: CustomFlatButtonWithUnderline(
+                      child: CustomTextButtonWithUnderline(
                         title: "Don't have an account?",
                         textColor: Color.fromRGBO(255, 242, 0, 1.0),
                         fontSize: 18.0,
@@ -284,7 +284,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
-              child: CustomFlatButton(
+              child: CustomTextButton(
                 title: "OK",
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
