@@ -88,7 +88,7 @@ class _DefaultTipScreenState extends State<DefaultTipScreen> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           updateDefaultTip("15");
                         },
@@ -99,7 +99,7 @@ class _DefaultTipScreenState extends State<DefaultTipScreen> {
                                   color: Colors.black, fontSize: 24.0)),
                         )),
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           updateDefaultTip("20");
                         },
@@ -111,7 +111,7 @@ class _DefaultTipScreenState extends State<DefaultTipScreen> {
                           ),
                         ),
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: () {
                           updateDefaultTip("25");
                         },

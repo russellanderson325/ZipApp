@@ -54,7 +54,7 @@ class NotificationService {
               subtitle: Text(message['notification']['body']),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text('Ok'),
                 onPressed: () => Navigator.of(context).pop(),
               ),

@@ -445,7 +445,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   child: ButtonBar(
                     alignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      FlatButton(
+                      TextButton(
                         child: Text('Request Ride'),
                         color: Colors.black,
                         onPressed: () async {
@@ -466,7 +466,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           // Navigator.pop(context);
                         },
                       ),
-                      FlatButton(
+                      TextButton(
                         child: Text('Cancel'),
                         color: Colors.black,
                         onPressed: () {
