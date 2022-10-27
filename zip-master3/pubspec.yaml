@@ -133,6 +133,12 @@ flutter:
     - family:  MyFlutterApp
       fonts:
         - asset: fonts/MyFlutterApp.ttf
+    - family: BebasNueRegular
+      fonts:
+        - asset: fonts/BebasNue-Regular.ttf
+    - family: PoppinsMedium
+      fonts:
+        - asset: fonts/Poppins-Medium.ttf
 
 
 

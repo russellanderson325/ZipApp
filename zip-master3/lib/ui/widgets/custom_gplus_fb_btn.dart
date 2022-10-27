@@ -8,10 +8,17 @@ class GoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      elevation: 1.0,
       onPressed: onPressed,
-      color: Colors.white,
-      splashColor: Colors.black12,
+      style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          primary: Colors.black12,
+          elevation: 1.0,
+          shape: (RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            side: BorderSide(
+              color: Colors.grey[300],
+            ),
+          ))),
       child: Container(
         width: 225.0,
         height: 40.0,
@@ -28,17 +35,11 @@ class GoogleButton extends StatelessWidget {
                   decoration: TextDecoration.none,
                   fontSize: 18.0,
                   fontWeight: FontWeight.w700,
-                  fontFamily: "OpenSans",
+                  fontFamily: "PoppinsMedium",
                 ),
               ),
             ),
           ],
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        side: BorderSide(
-          color: Colors.grey[300],
         ),
       ),
     );

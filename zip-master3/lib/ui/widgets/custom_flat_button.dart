@@ -26,8 +26,18 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      color: color,
-      splashColor: splashColor,
+      style: TextButton.styleFrom(
+        backgroundColor: color,
+        primary: splashColor,
+        elevation: 1.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          side: BorderSide(
+            color: borderColor,
+            width: borderWidth,
+          ),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Text(
@@ -39,15 +49,8 @@ class CustomTextButton extends StatelessWidget {
             decoration: TextDecoration.none,
             fontSize: fontSize,
             fontWeight: fontWeight,
-            fontFamily: "OpenSans",
+            fontFamily: "PoppinsMedium",
           ),
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        side: BorderSide(
-          color: borderColor,
-          width: borderWidth,
         ),
       ),
     );
@@ -80,8 +83,18 @@ class CustomTextButtonWithUnderline extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      color: color,
-      splashColor: splashColor,
+      style: TextButton.styleFrom(
+        backgroundColor: color,
+        primary: splashColor,
+        elevation: 1.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          side: BorderSide(
+            color: borderColor,
+            width: borderWidth,
+          ),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Text(
@@ -95,13 +108,6 @@ class CustomTextButtonWithUnderline extends StatelessWidget {
             fontWeight: fontWeight,
             fontFamily: "OpenSans",
           ),
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        side: BorderSide(
-          color: borderColor,
-          width: borderWidth,
         ),
       ),
     );
