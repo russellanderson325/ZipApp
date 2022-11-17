@@ -27,6 +27,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       Navigator.of(context).pop();
     };
 
+    // Need to setup account creation with their own password.
     _passwordField = CustomTextField(
       baseColor: Colors.grey[400],
       borderColor: Colors.grey[400],
