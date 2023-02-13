@@ -926,7 +926,8 @@ class _MainScreenState extends State<MainScreen> {
                         fontFamily: "Bebas")),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(255, 242, 0, 1.0),
+                      //backgroundColor: Color.fromRGBO(255, 242, 0, 1.0),
+                      primary: Color.fromRGBO(255, 242, 0, 1.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       )),

@@ -26,8 +26,20 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      color: color,
-      splashColor: splashColor,
+      // color: color,
+      // splashColor: splashColor,
+      // OG
+      style: TextButton.styleFrom(
+        primary: color,
+        onSurface: splashColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          side: BorderSide(
+            color: borderColor,
+            width: borderWidth,
+          ),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Text(
@@ -43,13 +55,13 @@ class CustomTextButton extends StatelessWidget {
           ),
         ),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        side: BorderSide(
-          color: borderColor,
-          width: borderWidth,
-        ),
-      ),
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(30.0),
+      //   side: BorderSide(
+      //     color: borderColor,
+      //     width: borderWidth,
+      //   ),
+      // ),
     );
   }
 }
@@ -80,8 +92,20 @@ class CustomTextButtonWithUnderline extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      color: color,
-      splashColor: splashColor,
+      //color: color,
+      //splashColor: splashColor,
+      // OG
+      style: TextButton.styleFrom(
+        primary: color,
+        onSurface: splashColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          side: BorderSide(
+            color: borderColor,
+            width: borderWidth,
+          ),
+        )
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Text(
@@ -97,13 +121,13 @@ class CustomTextButtonWithUnderline extends StatelessWidget {
           ),
         ),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        side: BorderSide(
-          color: borderColor,
-          width: borderWidth,
-        ),
-      ),
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(30.0),
+      //   side: BorderSide(
+      //     color: borderColor,
+      //     width: borderWidth,
+      //   ),
+      // ),
     );
   }
 }

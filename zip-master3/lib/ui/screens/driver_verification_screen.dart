@@ -105,10 +105,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           //     password: _password.text,
                           //     context: context);
                         },
+                        color: Color.fromRGBO(255, 242, 0, 1.0),
                         splashColor: Colors.black12,
                         borderColor: Color.fromRGBO(212, 20, 15, 1.0),
                         borderWidth: 0,
-                        color: Color.fromRGBO(255, 242, 0, 1.0),
+                        
                       ),
                     ),
                     Padding(

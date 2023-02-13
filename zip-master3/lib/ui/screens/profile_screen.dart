@@ -78,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   _uploadTask = null;
                                 });
                               },
-                              color: Color.fromRGBO(76, 86, 96, 1.0),
+                              style: ElevatedButton.styleFrom(primary: Color.fromRGBO(76,86,96,1.0)),
                               child: Text(
                                 "Continue",
                                 softWrap: true,
@@ -140,7 +140,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   //Use image_cropper for cropping
                                   //Need to build popup to choose
                                   TextButton(
-                                    splashColor: Colors.black,
+                                    //splashColor: Colors.black,
+                                    // OG
+                                    style: TextButton.styleFrom(onSurface: Colors.black),
                                     onPressed: () {
                                       _takePicOrGalleryPopup();
                                     },
@@ -248,11 +250,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             _isEditing = false;
                                           });
                                         },
-                                        shape: RoundedRectangleBorder(
+                                        // shape: RoundedRectangleBorder(
+                                        //     side:
+                                        //         BorderSide(color: Colors.grey),
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(12.0)),
+                                        // OG
+                                        style: TextButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
                                             side:
                                                 BorderSide(color: Colors.grey),
                                             borderRadius:
                                                 BorderRadius.circular(12.0)),
+                                        ),
                                         child: Text("Change Password",
                                             softWrap: true,
                                             textAlign: TextAlign.center,
@@ -338,7 +348,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 _isEditing = false;
               });
             },
-            color: Colors.black,
+            style: ElevatedButton.styleFrom(primary: Colors.black),
             child: Text(
               "Save",
               softWrap: true,
@@ -362,7 +372,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 _isEditing = false;
               });
             },
-            color: Colors.black,
+            style: ElevatedButton.styleFrom(primary: Colors.black),
             child: Text(
               "Cancel",
               softWrap: true,

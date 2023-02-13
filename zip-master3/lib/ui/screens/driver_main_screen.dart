@@ -657,7 +657,8 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                     icon: Icon(Icons.check, color: Colors.white),
                     style: ElevatedButton.styleFrom(
                         elevation: 1.0,
-                        backgroundColor: Color.fromRGBO(76, 86, 96, 1.0),
+                        //backgroundColor: Color.fromRGBO(76, 86, 96, 1.0),
+                        primary: Color.fromRGBO(76, 86, 96, 1.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0))),
                     label: Text(
@@ -674,7 +675,9 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                     icon: Icon(Icons.cancel),
                     style: ElevatedButton.styleFrom(
                         elevation: 1.0,
-                        backgroundColor: Colors.white,
+                        //backgroundColor: Colors.white,
+                        //OG
+                        primary: Colors.white,
                         shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black38),
                             borderRadius: BorderRadius.circular(12.0))),
