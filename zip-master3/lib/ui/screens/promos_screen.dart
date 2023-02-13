@@ -133,7 +133,9 @@ class _PromosScreenState extends State<PromosScreen> {
                 style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0)),
-                    color: Colors.white),
+                    //color: Colors.white),
+                    // OG
+                    primary: Colors.white),
                 child: Text(
                   "Apply",
                   softWrap: true,

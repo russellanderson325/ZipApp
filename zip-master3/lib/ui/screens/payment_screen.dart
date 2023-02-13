@@ -199,7 +199,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   void setError(dynamic error) {
     //_scaffoldKey.currentState
-    ScaffoldMessenger.of(context)
+    //ScaffoldMessenger.of(context)
+    // OG
+    Scaffold.of(context)
         .showSnackBar(SnackBar(content: Text(error.toString())));
     setState(() {
       _error = error.toString();
@@ -448,7 +450,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     children: <Widget>[
                       TextButton(
                         child: Text('Request Ride'),
-                        color: Colors.black,
+                        style: TextButton.styleFrom(primary: Colors.black),
                         onPressed: () async {
                           //buildShowDialog(context);
                           doc = await widget.paymentService
@@ -469,7 +471,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                       TextButton(
                         child: Text('Cancel'),
-                        color: Colors.black,
+                        style: TextButton.styleFrom(primary: Colors.black),
                         onPressed: () {
                           Navigator.pop(context);
                         },

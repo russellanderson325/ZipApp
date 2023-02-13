@@ -8,10 +8,21 @@ class GoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      elevation: 1.0,
+      //elevation: 1.0,
       onPressed: onPressed,
-      color: Colors.white,
-      splashColor: Colors.black12,
+      //color: Colors.white,
+      //splashColor: Colors.black12,
+      style: ElevatedButton.styleFrom(
+        elevation: 1.0,
+        primary: Colors.white,
+        onSurface: Colors.black12,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          side: BorderSide(
+            color: Colors.grey[300],
+          ),
+        ),
+      ),
       child: Container(
         width: 225.0,
         height: 40.0,
@@ -35,12 +46,12 @@ class GoogleButton extends StatelessWidget {
           ],
         ),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        side: BorderSide(
-          color: Colors.grey[300],
-        ),
-      ),
+      // shape: RoundedRectangleBorder(
+      //   borderRadius: BorderRadius.circular(12.0),
+      //   side: BorderSide(
+      //     color: Colors.grey[300],
+      //   ),
+      // ),
     );
   }
 }
