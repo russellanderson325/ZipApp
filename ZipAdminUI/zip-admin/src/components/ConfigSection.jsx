@@ -17,7 +17,7 @@ import {
 
 import { BiEdit } from "react-icons/bi";
 import { useState } from "react";
-import { realtimeDB } from "../helpers/firebase";
+import { firestoreDB } from "../helpers/firebase";
 
 const ConfigSection = (props) => {
   const configs = props.configurations;
@@ -27,7 +27,7 @@ const ConfigSection = (props) => {
 
   const configObj = {};
   configs.forEach((config) => {
-    configObj[config.key] = config.data;
+    configObj[config.key] = config.value;
   });
 
   const handleInputChange = (e) => {
@@ -43,7 +43,7 @@ const ConfigSection = (props) => {
 
   const saveChange = () => {
     onClose();
-    realtimeDB.ref("/").update({
+    firestoreDB.collection("config_settings").doc("admin_settings").update({
       [selectedKey]: textValue,
     });
     configObj[selectedKey] = textValue;

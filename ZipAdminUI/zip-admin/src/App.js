@@ -48,21 +48,18 @@ function App() {
       setRiderAccounts(temp);
     });
   };
-
   const getConfigData = () => {
-    const configRef = realtimeDB.ref("/");
-    configRef.once("value", function (snapshot) {
-      const keyValues = [];
-
-      snapshot.forEach(function (childSnapshot) {
-        const key = childSnapshot.key;
-        const data = childSnapshot.val();
-
-        keyValues.push({ key: key, data: data });
+    const getFromFirebase = firestoreDB.collection("config_settings");
+    getFromFirebase.onSnapshot((querySnapShot) => {
+      const temp = [];
+      querySnapShot.forEach((doc) => {
+        for (var i in doc.data()) {
+          temp.push({key: i, value: doc.data()[i]});
+        }
       });
-      setConfig(keyValues);
-    });
-  };
+      setConfig(temp);
+    })
+  }
 
   useEffect(() => {
     Promise.all([
