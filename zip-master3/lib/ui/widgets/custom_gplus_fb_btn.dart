@@ -14,8 +14,8 @@ class GoogleButton extends StatelessWidget {
       //splashColor: Colors.black12,
       style: ElevatedButton.styleFrom(
         elevation: 1.0,
-        primary: Colors.white,
-        onSurface: Colors.black12,
+        primary: Colors.black12,
+        onSurface: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
           side: BorderSide(
