@@ -5,7 +5,6 @@ import 'package:zip/business/currentUser.dart';
 import 'package:zip/business/drivers.dart';
 import 'package:zip/business/location.dart';
 import 'package:zip/business/user.dart';
-import 'package:zip/models/adminSettings.dart';
 import 'package:zip/models/driver.dart';
 import 'package:zip/models/request.dart';
 import 'package:zip/models/rides.dart';
@@ -27,12 +26,6 @@ class RideService {
   Function updateUI;
   bool removeRide;
 
-  DocumentReference adminSettingsReference;
-  Stream<AdminSettings> adminSettingsStream;
-  StreamSubscription adminSettingsSubscription;
-  double radius;
-  AdminSettings adminSettings;
-
   // Services
   Geoflutterfire geo = Geoflutterfire();
   LocationService locationService = LocationService();
@@ -51,7 +44,6 @@ class RideService {
     print("RideService Created");
     rideReference = _firestore.collection('rides').doc(userService.userID);
     currentRidesReference = _firestore.collection('CurrentRides').doc('currentRides');
-    adminSettingsReference = _firestore.collection('admin_settings').doc('settings');
   }
 
   /// This function will start the ride process between a customer
@@ -73,13 +65,7 @@ class RideService {
     int timesSearched = 0;
     // OG
     // replace hard coded radius with radius from firestore
-    // double radius = 50;
-    adminSettingsStream = adminSettingsReference
-      .snapshots()
-      .map((snapshot) => AdminSettings.fromDocument(snapshot))
-      .asBroadcastStream();
-    adminSettingsSubscription = adminSettingsStream.listen(_onAdminSettingsUpdate);
-
+    double radius = 50;
     isSearchingForRide = true;
     goToNextDriver = false;
 
@@ -232,10 +218,6 @@ class RideService {
     }
   }
 
-  void _onAdminSettingsUpdate(AdminSettings updatedAdminSettings) {
-    adminSettings = updatedAdminSettings;
-    radius = updatedAdminSettings.pickupRadius;
-  }
 
   Future<void> _initializeRideInFirestore(double lat, double long) async {
     destination = geo.point(latitude: lat, longitude: long);
@@ -284,12 +266,6 @@ class RideService {
         (await currentRidesReference.get()).get('ridesGoingNow');
     await currentRidesReference
         .set({'ridesGoingNow': currentNumberOfRides - 1});
-  }
-
-  Stream<AdminSettings> getAdminSettingsStream() {
-    return adminSettingsReference.snapshots().map((snapshot) {
-      return AdminSettings.fromDocument(snapshot);
-    });
   }
 
   Stream<Ride> getRideStream() {
