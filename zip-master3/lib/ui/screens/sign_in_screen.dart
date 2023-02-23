@@ -108,7 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               password: _password.text,
                               context: context);
                         },
-                        splashColor: Colors.black12,
+                        splashColor: Color.fromRGBO(255, 242, 0, 1.0),
                         borderColor: Color.fromRGBO(212, 20, 15, 1.0),
                         borderWidth: 0,
                         color: Color.fromRGBO(255, 242, 0, 1.0),

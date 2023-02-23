@@ -30,8 +30,8 @@ class CustomTextButton extends StatelessWidget {
       // splashColor: splashColor,
       // OG
       style: TextButton.styleFrom(
-        primary: color,
-        onSurface: splashColor,
+        primary: splashColor,
+        backgroundColor: color,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
           side: BorderSide(

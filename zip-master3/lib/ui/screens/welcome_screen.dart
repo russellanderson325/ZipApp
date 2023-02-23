@@ -47,7 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 title: "Log In",
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
-                textColor: Color.fromRGBO(255, 242, 0, 1.0),
+                textColor: Colors.black,
                 onPressed: () {
                   Navigator.of(context).pushNamed("/signin");
                 },
