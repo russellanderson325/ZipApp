@@ -17,4 +17,3 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
 export const firestoreDB = app.firestore();
-export const realtimeDB = firebase.database();
