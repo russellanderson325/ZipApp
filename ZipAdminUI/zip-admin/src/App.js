@@ -1,4 +1,4 @@
-import { firestoreDB, realtimeDB } from "./helpers/firebase";
+import { firestoreDB } from "./helpers/firebase";
 import { useState, useEffect } from "react";
 import { ChakraProvider, Stack } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
