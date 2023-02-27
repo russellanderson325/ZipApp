@@ -18,6 +18,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
   CustomTextField _passwordField;
   bool _blackVisible = false;
   VoidCallback onBackPress;
+  VoidCallback backHome;
+  VoidCallback backHomeII;
 
   @override
   void initState() {
@@ -25,6 +27,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
     onBackPress = () {
       Navigator.of(context).pop();
+    };
+
+    backHome = () {
+      onBackPress();
+      print('back home clicked');
+      Navigator.push(
+        context, 
+        MaterialPageRoute(builder: (context) => MainScreen()));
     };
 
     _passwordField = CustomTextField(
@@ -97,7 +107,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             _showErrorAlert(
                               title: "Login failed",
                               content: "Incorrect password",
-                              onPressed: _changeBlackVisible,
+                              onPressed: _retryVerify,
                             );
                           }
                           // _emailLogin(
@@ -140,8 +150,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
                 SafeArea(
                   child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: onBackPress,
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: backHome,
                   ),
                 ),
               ],
@@ -172,6 +182,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
       _blackVisible = !_blackVisible;
     });
   }
+
+  void _retryVerify() {
+    //_changeBlackVisible();
+    onBackPress();
+    print('close alert');
+//    _changeBlackVisible();
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => MainScreen())
+    );
+  }
+
 
   /*
     Verifies email and password, then navigates to apps main page
