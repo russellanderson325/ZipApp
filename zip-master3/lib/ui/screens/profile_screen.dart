@@ -140,8 +140,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   //Use image_cropper for cropping
                                   //Need to build popup to choose
                                   TextButton(
-                                    //splashColor: Colors.black,
-                                    // OG
                                     style: TextButton.styleFrom(onSurface: Colors.black),
                                     onPressed: () {
                                       _takePicOrGalleryPopup();
@@ -250,12 +248,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             _isEditing = false;
                                           });
                                         },
-                                        // shape: RoundedRectangleBorder(
-                                        //     side:
-                                        //         BorderSide(color: Colors.grey),
-                                        //     borderRadius:
-                                        //         BorderRadius.circular(12.0)),
-                                        // OG
                                         style: TextButton.styleFrom(
                                           shape: RoundedRectangleBorder(
                                             side:
