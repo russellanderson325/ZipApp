@@ -48,14 +48,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         title: new Text(
           'History',
         ),
-        // actions: <Widget>[
-        //   IconButton(
-        //     icon: Icon(Icons.clear),
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //   )
-        // ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: paymentService.getPaymentHistory(),
