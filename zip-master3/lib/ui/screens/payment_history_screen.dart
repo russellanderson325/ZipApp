@@ -31,7 +31,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   initState() {
     super.initState();
-
     StripePayment.setOptions(StripeOptions(
         publishableKey: "pk_test_Cn8XIP0a25tKPaf80s04Lo1m00dQhI8R0u"));
     //   paymentMethodList = [];
@@ -49,14 +48,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         title: new Text(
           'History',
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.clear),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: paymentService.getPaymentHistory(),
@@ -69,14 +60,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
               debugPrint("build widget: ${snapshot.data}");
               List<QueryDocumentSnapshot> paymentList = snapshot.data.docs;
               List<QueryDocumentSnapshot> successfulPaymentsList = new List();
-              print("TEST: test; $paymentList");
-              print("TEST: TSTET: ${paymentList[1].id}");
+              print("payment list: $paymentList");
+              print("id of payment list[1]: ${paymentList[1].id}");
               paymentList.forEach((element) {
                 if (element["status"] == "succeeded") {
-                  print("TESTtestetste: ${element.data()}");
+                  print("payment list element data: ${element.data()}");
                   successfulPaymentsList.add(element);
-                  print("OK2: ${successfulPaymentsList.length}");
-                  print("OK3: ${paymentList.length}");
+                  print("length of successful payments list: ${successfulPaymentsList.length}");
+                  print("length of payment list: ${paymentList.length}");
                   //print("TEST: TSTET: TEST ${element["refund"]}");
                 }
               });

@@ -26,9 +26,6 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      // color: color,
-      // splashColor: splashColor,
-      // OG
       style: TextButton.styleFrom(
         primary: splashColor,
         backgroundColor: color,
@@ -92,9 +89,6 @@ class CustomTextButtonWithUnderline extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      //color: color,
-      //splashColor: splashColor,
-      // OG
       style: TextButton.styleFrom(
         primary: color,
         onSurface: splashColor,

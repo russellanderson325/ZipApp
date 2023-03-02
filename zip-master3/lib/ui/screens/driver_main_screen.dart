@@ -675,8 +675,6 @@ class _DriverMainScreenState extends State<DriverMainScreen> {
                     icon: Icon(Icons.cancel),
                     style: ElevatedButton.styleFrom(
                         elevation: 1.0,
-                        //backgroundColor: Colors.white,
-                        //OG
                         primary: Colors.white,
                         shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.black38),

@@ -72,14 +72,14 @@ class _DriverHistoryScreenState extends State<DriverHistoryScreen> {
               debugPrint("build widget: ${snapshot.data}");
               List<QueryDocumentSnapshot> rideList = snapshot.data.docs;
               List<QueryDocumentSnapshot> successfulrideList = new List();
-              print("TEST: test; $rideList");
-              print("TEST: TSTET: ${rideList[1].id}");
+              print("ride list: $rideList");
+              print("id of ride list [1]: ${rideList[1].id}");
               rideList.forEach((element) {
                 if (element["status"] == "succeeded") {
-                  print("TESTtestetste: ${element.data()}");
+                  print("ride list element data: ${element.data()}");
                   successfulrideList.add(element);
-                  print("OK2: ${successfulrideList.length}");
-                  print("OK3: ${rideList.length}");
+                  print("length of successful ride list: ${successfulrideList.length}");
+                  print("length of ride list: ${rideList.length}");
                 }
               });
               print("OK: ${successfulrideList.length}");

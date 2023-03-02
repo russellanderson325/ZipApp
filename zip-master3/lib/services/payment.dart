@@ -38,8 +38,6 @@ class _PaymentState extends State<Payment> {
   }
 
   void setError(dynamic error) {
-    //ScaffoldMessenger.of(context)
-    //OG
     Scaffold.of(context)
         .showSnackBar(SnackBar(content: Text(error.toString())));
     setState(() {
@@ -107,7 +105,7 @@ class _PaymentState extends State<Payment> {
         .collection('stripe_customers')
         .doc(firebaseUser.uid)
         .collection('payment_methods');
-    print("I WANT TO SEE ALL THE PAYMENT METHOIDS");
+    print("list of payment methods:");
     print(paymentsMethods.snapshots());
     return paymentsMethods.snapshots();
   }
@@ -357,8 +355,6 @@ class _PaymentState extends State<Payment> {
                 StripePayment.paymentRequestWithCardForm(
                         CardFormPaymentRequest())
                     .then((paymentMethod) {
-                  //ScaffoldMessenger.of(context).showSnackBar(
-                  // OG
                   Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text('Received ${paymentMethod.id}')));
                   setState(() {

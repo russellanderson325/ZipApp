@@ -29,11 +29,11 @@ class LocationService {
       PermissionStatus status =
           await LocationPermissions().checkPermissionStatus();
       // Get permission from user
-      print("I got here222");
+      print("location permissions status checked");
       while (status != PermissionStatus.granted) {
         status = await LocationPermissions().requestPermissions();
       }
-      print("I got here333");
+      print("location permissions have been granted by user");
       // Ensure position is not null after setup
       //print("Latitude4: ${position.latitude}");
       //print("Longitiude4: ${position.longitude}");
@@ -42,7 +42,7 @@ class LocationService {
       print("position2: $position");
 
       while (position == null) {
-        print("I got here324355");
+        print("current position is null - using geolocator to get current position now.");
         position = await geolocator.getCurrentPosition();
       }
       print("Latitude: ${position.latitude}");
