@@ -190,6 +190,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: onBackPress,
+                    color: Color.fromRGBO(255, 242, 0, 1.0),
                   ),
                 ),
               ],
