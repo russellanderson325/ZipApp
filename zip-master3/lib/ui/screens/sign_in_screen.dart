@@ -168,6 +168,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: onBackPress,
+                    color: Color.fromRGBO(255, 242, 0, 1.0),
                   ),
                 ),
               ],
