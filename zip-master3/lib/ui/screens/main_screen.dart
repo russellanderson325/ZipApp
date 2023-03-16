@@ -985,7 +985,7 @@ class _MainScreenState extends State<MainScreen> {
     }
     // convert meters to miles
     length = length * 0.000621371;
-    print(length);
+    print("ride distance = $length");
     return length;
   }
 
