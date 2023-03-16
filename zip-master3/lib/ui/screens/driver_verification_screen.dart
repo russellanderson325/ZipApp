@@ -19,7 +19,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
   bool _blackVisible = false;
   VoidCallback onBackPress;
   VoidCallback backHome;
-  VoidCallback backHomeII;
 
   @override
   void initState() {
@@ -184,10 +183,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 
   void _retryVerify() {
-    //_changeBlackVisible();
     onBackPress();
     print('close alert');
-//    _changeBlackVisible();
     Navigator.push(
       context, 
       MaterialPageRoute(builder: (context) => MainScreen())

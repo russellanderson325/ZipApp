@@ -9,18 +9,6 @@ import 'package:zip/ui/screens/driver_settings_screen.dart';
 import 'package:zip/business/drivers.dart';
 import 'package:zip/ui/widgets/custom_flat_button.dart';
 
-
-
-// class EarningsScreen extends StatefulWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: "Earnings Screen",
-//       home: MyStatelessWidget(),
-//     );
-//   }
-// }
-
 class EarningsScreen extends StatefulWidget {
   _EarningsScreenState createState() => _EarningsScreenState();
 }
@@ -116,69 +104,3 @@ class _EarningsScreenState extends State<EarningsScreen> {
 
 }
   
-
-
-/*
-  @override
-  Widget build(BuildContext context) {
-    screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: <Widget> [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 70.0, bottom: 10.0, left: 10.0, right: 10.0),
-            child: Text(
-              "Driver Earnings",
-              softWrap: true,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color.fromRGBO(255, 242, 0, 1.0),
-                decoration: TextDecoration.none,
-                fontSize: 32.0,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Bebas',
-              ),
-            ),
-          ),
-          Container(
-            height: screenHeight,
-            width: screenWidth,
-            child: Center(
-              child: Text(
-                  "Cash Amount", style: TextStyle(color: Colors.yellow, fontSize: 22.0), textAlign: TextAlign.center,)
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 20.0, horizontal: 40.0),
-            child: CustomTextButton(
-              title: "Cash Out",
-              fontSize: 20.0,
-              fontWeight: FontWeight.w500,
-              textColor: Colors.black,
-              onPressed: () {
-                //do this action of cash out call that function
-                // and change tip value back to 0
-                print('driver earnings - cash out button clicked');
-              },
-              color: Color.fromRGBO(255, 242, 0, 1.0),
-              splashColor: Color.fromRGBO(255,242,0,1.0),
-              borderColor: Colors.black12,
-              borderWidth: 0,
-              //child: Text(
-              //  "Cash Out",
-              //  style: TextStyle(color: Colors.black, fontSize: 22.0),
-              //  textAlign: TextAlign.center,
-              //)
-            ),
-          ),
-        ],
-    ));
-  }
-}
-*/
