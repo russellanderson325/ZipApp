@@ -108,9 +108,9 @@ class Payment {
         if (documentSnapshot.exists) {
           print("Test: Exists:");
           docReference = documentSnapshot;
-          print("TEST: DOC REERENCE: ${docReference.data()}");
+          print("TEST: PAYMENMT DOC REERENCE: ${docReference.data()}");
         } else {
-          print("Test: Not exists:");
+          print("validatePayment: looking for snapshot");
           docReference = null;
         }
       });
@@ -123,7 +123,7 @@ class Payment {
 
   Future<void> sendRefundRequest(docId) async {
     var firebaseUser = auth.FirebaseAuth.instance.currentUser;
-    print("TEST: TSTET: I WAS CALLED");
+    print("sendRefundRequest() has been called");
     await FirebaseFirestore.instance
         .collection("stripe_customers")
         .doc(firebaseUser.uid)
@@ -137,7 +137,7 @@ class Payment {
 
   Future<bool> getRefundStatus(docId) async {
     var firebaseUser = auth.FirebaseAuth.instance.currentUser;
-    print("TEST: TSTET: I WAS CALLED");
+    print("getRefundStatus() has been called");
     bool doc;
     doc = await FirebaseFirestore.instance
         .collection("stripe_customers")
@@ -255,11 +255,11 @@ class Payment {
 */
   Future<DocumentSnapshot> checkPaymentAdded() async {
     var firebaseUser = auth.FirebaseAuth.instance.currentUser;
-    print("TEST3: card $cardDocumentID");
+    print("card document id: $cardDocumentID");
     var cardID = cardDocumentID.id;
-    print("TEST4: card $cardID");
+    print("card id: $cardID");
     DocumentSnapshot docReference;
-    print("TEst12312321: $docReference");
+    print("payment doc reference: $docReference");
     while (docReference == null) {
       //print("TEST3: ${docReference.data()}");
       await FirebaseFirestore.instance
@@ -272,18 +272,18 @@ class Payment {
           .get()
           .then((DocumentSnapshot documentSnapshot) {
         if (documentSnapshot.exists) {
-          print("Test: Exists:");
+          print("payment snapshot exists");
           docReference = documentSnapshot;
-          print("TEST: DOC REERENCE: ${docReference.data()}");
+          print("payment doc reference: ${docReference.data()}");
         } else {
-          print("Test: Not exists:");
+          print("payment snapshot not found");
           docReference = null;
         }
       });
       // print("TEST4: ${docReference.data()}");
     }
     //Navigator.of(context).pop();
-    print("TEST: ${docReference.data()}");
+    print("payment doc reference.data: ${docReference.data()}");
     return docReference;
   }
 }
