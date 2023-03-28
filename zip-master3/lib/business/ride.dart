@@ -169,7 +169,7 @@ class RideService {
     // double check with sponsors as to how the pickup radius should be implemented
     DocumentReference adminSettingsRef = _firestore.collection('config_settings').doc('admin_settings'); 
     pickupRadius = (await adminSettingsRef.get()).get('PickupRadius').toDouble(); 
-    print('retrieved pickup radius from admin settings: $pickupRadius'); 
+    print('Pickup Radius retrieved from admin settings: $pickupRadius'); 
   }  
 
   // This method is attached to the ride stream and run every time the ride document in firestore changes.
