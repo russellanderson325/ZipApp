@@ -9,7 +9,7 @@ class LocationService {
   Geoflutterfire geo = Geoflutterfire();
   GeolocationStatus geolocationStatus;
   Position position;
-  bool initizalized = false;
+  bool initialized = false;
   LocationOptions locationOptions =
       LocationOptions(accuracy: LocationAccuracy.high, distanceFilter: 10);
   Stream<Position> positionStream;
@@ -35,8 +35,6 @@ class LocationService {
       }
       print("location permissions have been granted by user");
       // Ensure position is not null after setup
-      //print("Latitude4: ${position.latitude}");
-      //print("Longitiude4: ${position.longitude}");
       print("position: $position");
       position = await geolocator.getCurrentPosition();
       print("position2: $position");
@@ -46,7 +44,7 @@ class LocationService {
         position = await geolocator.getCurrentPosition();
       }
       print("Latitude: ${position.latitude}");
-      print("Longitiude: ${position.longitude}");
+      print("Longitude: ${position.longitude}");
       // Create position stream and subscribe to keep service's position up to date.
       positionStream =
           geolocator.getPositionStream(locationOptions).asBroadcastStream();
@@ -54,10 +52,11 @@ class LocationService {
         if (position != null) {
           this.position = position;
           print("Latitude2: ${position.latitude}");
-          print("Longitiude2: ${position.longitude}");
+          print("Longitude2: ${position.longitude}");
         }
       });
       print("LocationService initialized");
+      initialized = true;
       return true;
     } catch (e) {
       print("Error initializing LocationService $e");
@@ -69,4 +68,12 @@ class LocationService {
     return geo.point(
         latitude: position.latitude, longitude: position.longitude);
   }
+}
+
+void main() async {
+  LocationService locationService = LocationService();
+  await locationService.setupService();
+  GeoFirePoint currentGeoFirePoint = locationService.getCurrentGeoFirePoint();
+  print("Current latitude: ${currentGeoFirePoint.latitude}");
+  print("Current longitude: ${currentGeoFirePoint.longitude}");
 }

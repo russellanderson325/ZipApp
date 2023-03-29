@@ -40,7 +40,7 @@ dependencies:
   stripe_sdk: ^3.0.1+1
   http: ^0.12.0+4
   flutter_google_places: ^0.2.4
-  google_maps_webservice: ^0.0.16
+  google_maps_webservice: 
   email_launcher: ^1.0.0
   mailto: ^1.0.0
   strings: ^0.1.4
@@ -50,6 +50,7 @@ dependencies:
   material_design_icons_flutter: ^4.0.5855
   flutter_speed_dial: ^2.1.1
   geocoding: ^1.0.5
+  polyline: ^1.0.0
   
 
 
@@ -72,6 +73,7 @@ dependency_overrides:
   flutter_test:
     sdk: flutter
   flutter_automation: any
+  
 
 
 flutter_icons:
