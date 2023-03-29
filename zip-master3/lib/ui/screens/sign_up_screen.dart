@@ -26,6 +26,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _blackVisible = false;
   VoidCallback onBackPress;
 
+  var pastRides = [];
+  var pastDrives = [];
+
   final auth = AuthService();
 
   @override
@@ -251,6 +254,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             phone: number,
             profilePictureURL: '',
             lastActivity: DateTime.now(),
+            pastRides: [],
+            pastDrives: [],
           ));
           onBackPress();
         });

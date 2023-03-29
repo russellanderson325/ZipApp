@@ -10,6 +10,8 @@ import 'package:zip/models/request.dart';
 import 'package:zip/models/rides.dart';
 import 'package:zip/ui/screens/main_screen.dart';
 
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+
 class RideService {
   static final RideService _instance = RideService._internal();
   final bool showDebugPrints = true;
@@ -272,5 +274,16 @@ class RideService {
     return rideReference.snapshots().map((snapshot) {
       return Ride.fromDocument(snapshot);
     });
+  }
+
+  Stream<QuerySnapshot> getRiderHistory() {
+    var firebaseUser = auth.FirebaseAuth.instance.currentUser;
+    CollectionReference paymentsMethods = FirebaseFirestore.instance
+        .collection('rides')
+        .doc(firebaseUser.uid)
+        .collection('payments');
+    var paymentHist = paymentsMethods;
+    print('payment history: $paymentHist');
+    return paymentsMethods.snapshots();
   }
 }
