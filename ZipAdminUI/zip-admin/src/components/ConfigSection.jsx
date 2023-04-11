@@ -41,12 +41,20 @@ const ConfigSection = (props) => {
     onOpen();
   };
 
-  const saveChange = () => {
+  const saveChange = async () => {
     onClose();
     firestoreDB.collection("config_settings").doc("admin_settings").update({
       [selectedKey]: textValue,
     });
     configObj[selectedKey] = textValue;
+    console.log(selectedKey);
+    if (selectedKey === "TermsAndConditions") {
+      const acceptedUsersSnapshot = await firestoreDB.collection("users").where("acceptedtc", '==', true).get();
+      acceptedUsersSnapshot.forEach((user) => {
+        console.log(user.id);
+        firestoreDB.collection("users").doc(user.id).update({"acceptedtc": false,});
+      });
+    }
   };
 
   return (
