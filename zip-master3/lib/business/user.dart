@@ -46,21 +46,5 @@ class UserService {
     });
   }
 
-  Stream<QuerySnapshot> getPastRides() {
-    CollectionReference pastRides = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('pastRides');
-    return pastRides.snapshots();
-  }
-
-  Stream<QuerySnapshot> getPastDrives() {
-    CollectionReference pastDrives = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('pastDrives');
-    return pastDrives.snapshots();
-  }
-
 
 }

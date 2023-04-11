@@ -28,6 +28,8 @@ class RideService {
   Function updateUI;
   bool removeRide;
 
+  String rideID;
+
   // Services
   Geoflutterfire geo = Geoflutterfire();
   LocationService locationService = LocationService();
@@ -44,7 +46,9 @@ class RideService {
   RideService._internal() {
     // print("I NEED TO GET INTO THIS FUNCTION HOW THE FUCK DO I");
     print("RideService Created");
-    rideReference = _firestore.collection('rides').doc(userService.userID);
+//    rideReference = _firestore.collection('rides').doc(userService.userID);
+    rideReference = _firestore.collection('rides').doc();
+    rideID = rideReference.id;
     currentRidesReference = _firestore.collection('CurrentRides').doc('currentRides');
   }
 
@@ -145,9 +149,9 @@ class RideService {
         .collection('drivers')
         .doc(driver.uid)
         .collection('requests')
-        .doc(userService.userID)
+        .doc(rideID)
         .set(Request(
-                id: userService.userID,
+                id: rideID,
                 name: "${userService.user.firstName}",
                 destinationAddress: destination,
                 pickupAddress: pickup,
@@ -225,6 +229,7 @@ class RideService {
     destination = geo.point(latitude: lat, longitude: long);
     pickup = locationService.getCurrentGeoFirePoint();
     DocumentSnapshot myRide = await rideReference.get();
+    print('** rideReference = ${myRide.id}');
     addCurrentRider();
     if (!myRide.exists) {
       // Create new ride document for the user

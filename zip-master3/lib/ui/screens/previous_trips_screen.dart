@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:zip/models/user.dart';
+import 'package:zip/business/user.dart';
 
 class PreviousTripsScreen extends StatefulWidget {
   _PreviousTripsScreenState createState() => _PreviousTripsScreenState();
@@ -9,14 +10,24 @@ class PreviousTripsScreen extends StatefulWidget {
 
 class _PreviousTripsScreenState extends State<PreviousTripsScreen> {
   VoidCallback onBackPress;
+  final UserService userService = UserService();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<QueryDocumentSnapshot> pastRidesList;
+  List<dynamic> pastRideIDs;
   @override
   void initState() {
     onBackPress = () {
       Navigator.of(context).pop();
     };
     super.initState();
+    _retrievePastRideIDs();
   }
 
+  void _retrievePastRideIDs() async {
+    DocumentReference userRef = _firestore.collection('users').doc(userService.userID);
+    pastRideIDs = (await userRef.get()).get('pastRides');
+    print('past ride ids: $pastRideIDs');
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

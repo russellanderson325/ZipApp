@@ -13,7 +13,8 @@ class Ride {
   final String status;
 
   Ride(
-      {this.uid,
+      {
+      this.uid,
       this.userName,
       this.userPictureURL,
       this.drid,
@@ -38,6 +39,8 @@ class Ride {
   }
 
   factory Ride.fromJson(Map<String, Object> doc) {
+    print('doc = ');
+    print(doc);
     Ride ride = new Ride(
         uid: doc['uid'],
         userName: doc['userName'],

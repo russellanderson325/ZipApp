@@ -1142,11 +1142,19 @@ class _MainScreenState extends State<MainScreen> {
             },
           ),
           ListTile(
-            title: Text('Previous Trips'),
+            title: Text('Payment History'),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => HistoryScreen()));
+            },
+          ),
+          ListTile(
+            title: Text('Previous Trips'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PreviousTripsScreen()));
             },
           ),
           ListTile(
