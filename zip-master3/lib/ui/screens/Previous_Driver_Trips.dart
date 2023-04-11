@@ -32,6 +32,7 @@ class _DriverHistoryScreenState extends State<DriverHistoryScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   DocumentReference rideReference;
   UserService userService = UserService();
+  List<dynamic> pastDriveIDs;
 
   //var paymentMethodList;
   @override
@@ -42,6 +43,14 @@ class _DriverHistoryScreenState extends State<DriverHistoryScreen> {
         publishableKey: "pk_test_Cn8XIP0a25tKPaf80s04Lo1m00dQhI8R0u"));
     //   paymentMethodList = [];
     paymentService.getPaymentMethods();
+
+    _retrievePastDriveIDs();
+  }
+
+  void _retrievePastDriveIDs() async {
+    DocumentReference userRef = _firestore.collection('users').doc(userService.userID);
+    pastDriveIDs = (await userRef.get()).get('pastDrives');
+    print('past ride ids: $pastDriveIDs');
   }
 
   @override

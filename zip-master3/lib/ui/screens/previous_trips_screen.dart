@@ -13,7 +13,7 @@ class _PreviousTripsScreenState extends State<PreviousTripsScreen> {
   final UserService userService = UserService();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<QueryDocumentSnapshot> pastRidesList;
-  List<dynamic> pastRideIDs;
+  List<String> pastRideIDs;
   @override
   void initState() {
     onBackPress = () {
