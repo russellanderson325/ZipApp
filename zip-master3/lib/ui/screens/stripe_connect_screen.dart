@@ -37,12 +37,12 @@ class _StripeScreenState extends State<StripeScreen> {
           'Driver Payments',
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.clear),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
+          // IconButton(
+          //   icon: Icon(Icons.clear),
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          // )
         ],
       ),
         body: SingleChildScrollView(
@@ -54,10 +54,11 @@ class _StripeScreenState extends State<StripeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        "Set up Stripe Connect to recieve payouts. Place holder text. Place holder text.Place holder text.Place holder text.Place holder text.Place holder text."
-                         + "Place holder text. Place holder text. Place holder text.Place holder text. Place holder text."
-                         + "Place holder text.Place holder text.Place holder text.Place holder text.Place holder text.Place holder text."
-                         + "Place holder text.Place holder text.Place holder text.Place holder text.Place holder text.Place holder text.",
+                         "Set up Stripe Connect to recieve payouts.", 
+                        //Place holder text. Place holder text.Place holder text.Place holder text.Place holder text.Place holder text."
+                        //  + "Place holder text. Place holder text. Place holder text.Place holder text. Place holder text."
+                        //  + "Place holder text.Place holder text.Place holder text.Place holder text.Place holder text.Place holder text."
+                        //  + "Place holder text.Place holder text.Place holder text.Place holder text.Place holder text.Place holder text.",
                         softWrap: true,
                       ),
                       Row(
