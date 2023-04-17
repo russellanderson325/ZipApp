@@ -203,6 +203,10 @@ class DriverService {
 
   void completeRide() async {
     if (currentRide.status != "ENDED") {
+      String rideID = driver.currentRideID;
+      _addRideToDriver(rideID);
+      _addRideToRider(rideID);
+
       await _firestore.collection('rides').doc(driver.currentRideID).update({
         'lastActivity': DateTime.now(),
         'status': 'ENDED',
@@ -213,6 +217,29 @@ class DriverService {
     }
     print(this.driver.uid);
     stopDriving();
+  }
+
+  void _addRideToDriver(rideID) async {
+    print('Adding ride $rideID to driver list of past drives');
+    var rideObj = await _firestore.collection('rides').doc(rideID).get();
+    var rideDriver = rideObj.get('drid');
+    
+    var driverPastDrives = (await _firestore.collection('users').doc(rideDriver).get()).get('pastDrives');
+    driverPastDrives.add(driver.currentRideID);
+    await _firestore.collection('users').doc(rideDriver).update({
+      'pastDrives': driverPastDrives
+    });
+  }
+
+  void _addRideToRider(rideID) async {
+    print('Adding ride $rideID to rider list of past rides');
+    var rideObj = await _firestore.collection('rides').doc(rideID).get();
+    var rideRider = rideObj.get('uid');
+    var riderPastRides = (await _firestore.collection('users').doc(rideRider).get()).get('pastRides');
+    riderPastRides.add(rideID);
+    await _firestore.collection('users').doc(rideRider).update({
+      'pastRides': riderPastRides
+    });
   }
 
   void cancelRide() async {

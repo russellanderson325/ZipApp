@@ -10,6 +10,8 @@ import 'package:zip/models/request.dart';
 import 'package:zip/models/rides.dart';
 import 'package:zip/ui/screens/main_screen.dart';
 
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+
 class RideService {
   static final RideService _instance = RideService._internal();
   final bool showDebugPrints = true;
@@ -25,6 +27,9 @@ class RideService {
   GeoFirePoint pickup;
   Function updateUI;
   bool removeRide;
+  double pickupRadius; 
+
+  String rideID;
 
   // Services
   Geoflutterfire geo = Geoflutterfire();
@@ -40,9 +45,10 @@ class RideService {
   }
 
   RideService._internal() {
-    // print("I NEED TO GET INTO THIS FUNCTION HOW THE FUCK DO I");
     print("RideService Created");
-    rideReference = _firestore.collection('rides').doc(userService.userID);
+//    rideReference = _firestore.collection('rides').doc(userService.userID);
+    rideReference = _firestore.collection('rides').doc();
+    rideID = rideReference.id;
     currentRidesReference = _firestore.collection('CurrentRides').doc('currentRides');
   }
 
@@ -63,9 +69,7 @@ class RideService {
     rideSubscription = rideStream.listen(
         _onRideUpdate); // Listen to changes in ride Document and update service
     int timesSearched = 0;
-    // OG
-    // replace hard coded radius with radius from firestore
-    double radius = 50;
+    double radius = 1; 
     isSearchingForRide = true;
     goToNextDriver = false;
 
@@ -91,9 +95,9 @@ class RideService {
       } else {
         timesSearched += 1;
         radius += 10;
-        if (showDebugPrints)
-          print(
-              "No Drivers Found after $timesSearched tries, setting radius to $radius");
+        if (showDebugPrints) {
+          print("No Drivers Found after $timesSearched tries, setting radius to $radius");
+        }
         if (timesSearched > 5) {
           isSearchingForRide = false;
         } else {
@@ -143,9 +147,9 @@ class RideService {
         .collection('drivers')
         .doc(driver.uid)
         .collection('requests')
-        .doc(userService.userID)
+        .doc(rideID)
         .set(Request(
-                id: userService.userID,
+                id: rideID,
                 name: "${userService.user.firstName}",
                 destinationAddress: destination,
                 pickupAddress: pickup,
@@ -165,6 +169,14 @@ class RideService {
     }
     goToNextDriver = false;
   }
+
+  void _retrievePickupRadius() async { 
+    // pickup radius is retrieved from config settings in firestore
+    // double check with sponsors as to how the pickup radius should be implemented
+    DocumentReference adminSettingsRef = _firestore.collection('config_settings').doc('admin_settings'); 
+    pickupRadius = (await adminSettingsRef.get()).get('PickupRadius').toDouble(); 
+    print('Pickup Radius retrieved from admin settings: $pickupRadius'); 
+  }  
 
   // This method is attached to the ride stream and run every time the ride document in firestore changes.
   // Use it to keep the UI state in sync and the local Ride object updated.
@@ -218,11 +230,11 @@ class RideService {
     }
   }
 
-
   Future<void> _initializeRideInFirestore(double lat, double long) async {
     destination = geo.point(latitude: lat, longitude: long);
     pickup = locationService.getCurrentGeoFirePoint();
     DocumentSnapshot myRide = await rideReference.get();
+    print('** rideReference = ${myRide.id}');
     addCurrentRider();
     if (!myRide.exists) {
       // Create new ride document for the user
@@ -272,5 +284,16 @@ class RideService {
     return rideReference.snapshots().map((snapshot) {
       return Ride.fromDocument(snapshot);
     });
+  }
+
+  Stream<QuerySnapshot> getRiderHistory() {
+    var firebaseUser = auth.FirebaseAuth.instance.currentUser;
+    CollectionReference paymentsMethods = FirebaseFirestore.instance
+        .collection('rides')
+        .doc(firebaseUser.uid)
+        .collection('payments');
+    var paymentHist = paymentsMethods;
+    print('payment history: $paymentHist');
+    return paymentsMethods.snapshots();
   }
 }
