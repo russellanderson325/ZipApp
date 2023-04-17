@@ -12,96 +12,53 @@ class _PreviousTripsScreenState extends State<PreviousTripsScreen> {
   VoidCallback onBackPress;
   final UserService userService = UserService();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   List<QueryDocumentSnapshot> pastRidesList;
-  List<String> pastRideIDs;
+  List<dynamic> pastRideIDs;
+  DocumentReference rideReference;
+  
+
   @override
   void initState() {
     onBackPress = () {
       Navigator.of(context).pop();
     };
     super.initState();
-    _retrievePastRideIDs();
   }
 
-  void _retrievePastRideIDs() async {
+  Future _retrievePastRideIDs() async {
     DocumentReference userRef = _firestore.collection('users').doc(userService.userID);
     pastRideIDs = (await userRef.get()).get('pastRides');
     print('past ride ids: $pastRideIDs');
+    return pastRideIDs;
   }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onBackPress,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(
-            top: 23.0,
-            bottom: 0.0,
-            left: 0.0,
-            right: 0.0,
-          ),
-          child: Column(
-            children: <Widget>[
-              TopRectangle(
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6.0),
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_back, color: Colors.black),
-                        onPressed: onBackPress,
-                      ),
-                    ),
-                    Text("   Previous Trips",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 36.0,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: "Bebas"))
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
-              ),
-              Text("  Information heading",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: "Bebas")),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
-              ),
-            ],
-          ),
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: new AppBar(
+        title: new Text(
+          'Past Trips',
         ),
       ),
+      
+      body: FutureBuilder<void>(
+        future: _retrievePastRideIDs(),
+        builder: (context, index) {
+          return ListView.builder(
+            itemCount: (pastRideIDs != null) ? pastRideIDs.length : 0,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 50,
+                color: Colors.yellow,
+                child: Center(child: Text('past ride: ${pastRideIDs[index]}')),
+              );
+            }
+          );
+        }
+      ) 
     );
-  }
-}
-
-class TopRectangle extends StatelessWidget {
-  final color;
-  final height;
-  final width;
-  final child;
-  final posi;
-  TopRectangle(
-      {this.posi,
-      this.child,
-      this.color,
-      this.height = 100.0,
-      this.width = 500.0});
-
-  build(context) {
-    return Container(
-      width: width,
-      height: height,
-      color: Color.fromRGBO(76, 86, 96, 1.0),
-      child: child,
-    );
-  }
+    
+  } 
 }
