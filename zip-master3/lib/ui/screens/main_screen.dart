@@ -53,6 +53,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   //this is the global key used for the scaffold
+ // MapScreen _mapScreen;
+
+  bool _scrollGesturesEnabled = true;
+  bool _tiltGesturesEnabled = true;
+  bool _rotateGesturesEnabled = true;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   GlobalKey<MapScreen> mapScaffoldKey;
   double screenHeight, screenWidth;
@@ -63,6 +68,57 @@ class _MainScreenState extends State<MainScreen> {
   Map<String, Marker> _destinationMarkers = {};
   bool _isMapInteractive = false;
   LatLngBounds _cameraTargetBounds;
+  //final Function setPolylinesCallback;
+  //_MainScreenState({this.setPolylinesCallback});
+  /*void setPolylines() async {
+    if (_initialPosition != null && _destinationPin != null) {
+      polylineCoordinates.clear(); // Clear the previous polyline coordinates
+      _polylines.clear(); // Clear the previous polylines
+      String apiKey = "AIzaSyDsPh6P9PDFmOqxBiLXpzJ1sW4kx-2LN5g";
+      PolylinePoints polylinePoints = PolylinePoints();
+      List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
+          apiKey,
+          _initialPosition.latitude,
+          _initialPosition.longitude,
+          _destinationPin.latitude,
+          _destinationPin.longitude);
+      // Print the raw result to the console
+      // print("Raw result: $result");
+
+      if (result.isNotEmpty) {
+        // result.forEach((PointLatLng point) {
+        // polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        // });
+
+        // Print the polylineCoordinates list to the console
+        // print("Polyline coordinates: $polylineCoordinates");
+
+        result.forEach((PointLatLng point) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        });
+
+        setState(() {
+          Polyline polyline = Polyline(
+              polylineId: PolylineId("p"),
+              color: Colors.blue,
+              points: polylineCoordinates);
+          _polylines.add(polyline);
+        });
+      }
+    }
+    await _goToDestination(_destinationPin);
+  }
+
+  Future<void> _goToDestination(LatLng destination) async {
+    if (destination != null) {
+      print("Moving to destination: ${destination.latitude}, ${destination.longitude}");
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(destination.latitude, destination.longitude),
+          zoom: 14.47)));
+    }
+  }*/
+
 
 
 
@@ -92,6 +148,8 @@ class _MainScreenState extends State<MainScreen> {
   bool paccepted = true;
 
   bool pinDropDestination = false;
+
+  //bool _zoomGesturesEnabled = true;
 
   //bool _menuVisible;
   //bool termsSelect;
@@ -449,6 +507,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //_mapScreen = context.findAncestorStateOfType<MapScreen>();
     screenHeight = MediaQuery
         .of(context)
         .size
@@ -463,6 +522,9 @@ class _MainScreenState extends State<MainScreen> {
       body: Stack(children: <Widget>[
         TheMap(
           key: mapScaffoldKey,
+          scrollGesturesEnabled: _scrollGesturesEnabled,
+          tiltGesturesEnabled: _tiltGesturesEnabled,
+          rotateGesturesEnabled: _rotateGesturesEnabled,
         ),
         Align(
           alignment: Alignment.topLeft,
@@ -583,6 +645,7 @@ class _MainScreenState extends State<MainScreen> {
                                 onTap: () async {
                                   setState(() {
                                     bottomSheetStatus = BottomSheetStatus.closed;
+
                                   });
                                   Prediction p = await PlacesAutocomplete.show(
                                       context: context,
@@ -611,9 +674,13 @@ class _MainScreenState extends State<MainScreen> {
                                       _cameraTargetBounds = null;
                                     });
 
+
+
                                     _addDestinationMarker(newDestination);
                                     //await setPolylines();
                                     //await _goToDestination();
+
+
                                   } else {
                                     search_controller.text = '';
                                     this.address = '';
@@ -729,19 +796,24 @@ class _MainScreenState extends State<MainScreen> {
                                     this.details = await _places.getDetailsByPlaceId(v.placeId);
                                     print("details " + this.details.toString());
 
-                                    LatLng destinationLatLng = LatLng(
+                                    LatLng newDestination = LatLng(
                                     this.details.result.geometry.location.lat,
                                     this.details.result.geometry.location.lng);
 
                                     setState(() {
                                       _isMapInteractive = true;
                                     });
+                                    setState(() {
+                                      _scrollGesturesEnabled = false;
+                                      _tiltGesturesEnabled = false;
+                                      _rotateGesturesEnabled = false;
+                                    });
 
-                                    //setState(() {
-                                      //_destinationPin = newDestination;
-                                    //});
+                                    setState(() {
+                                      _destinationPin = newDestination;
+                                    });
 
-                                    //_addDestinationMarker(newDestination);
+                                    _addDestinationMarker(newDestination);
                                     //await setPolylines();
                                     //await _goToDestination();
 
@@ -1288,15 +1360,20 @@ class _MainScreenState extends State<MainScreen> {
 ///this is the map class for displaying the google map
 
 class TheMap extends StatefulWidget {
-  TheMap({Key key}) : super(key: key);
+  final bool scrollGesturesEnabled;
+  final bool tiltGesturesEnabled;
+  final bool rotateGesturesEnabled;
+  TheMap({Key key, this.scrollGesturesEnabled, this.tiltGesturesEnabled, this.rotateGesturesEnabled}) : super(key: key);
 
   @override
   State<TheMap> createState() => MapScreen();
 }
 
+
 class MapScreen extends State<TheMap> {
   ///variables and services needed to  initialize the map
   ///and location of the user.
+  //GlobalKey<MapScreen> _mapScreenKey = GlobalKey();
   final DriverService driverService = DriverService();
   LocationService location = LocationService();
   static LatLng _initialPosition;
@@ -1313,6 +1390,11 @@ class MapScreen extends State<TheMap> {
     LatLng(32.62932, -85.46249)
   };
   List<Driver> driversList;
+
+  bool _scrollGesturesEnabled = true;
+  bool _tiltGesturesEnabled = true;
+  bool _rotateGesturesEnabled = true;
+
   void updateMapPins(LatLng destination) {
     setState(() {
       // 更新初始位置标记
@@ -1328,7 +1410,7 @@ class MapScreen extends State<TheMap> {
           markerId: MarkerId('destination'),
           position: destination,
           icon: _destinationIcon,
-          infoWindow: InfoWindow(title: '目的地')));
+          infoWindow: InfoWindow(title: 'destination')));
     });
   }
 
@@ -1351,8 +1433,6 @@ class MapScreen extends State<TheMap> {
   BitmapDescriptor _destinationIcon;
 
   LatLng pinDrop;
-
-
 
 
   // the user's initial location and current location
@@ -1385,71 +1465,70 @@ class MapScreen extends State<TheMap> {
   Widget build(BuildContext context) {
     return new Scaffold(
       //key: mapScaffoldKey,
-        body: _initialPosition == null
-            ? Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-          ),
-        )
-            :
-        //Listener  ( child:
-        GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: _currentPosition,
-            onMapCreated: (GoogleMapController controller) {
-              _setStyle(controller);
-              _controller.complete(controller);
-              LatLngBounds _cameraTargetBounds;
-              //cameraTargetBounds: _cameraTargetBounds;
+      //key: _mapScreenKey,
 
+      body: _initialPosition == null
+          ? Center(
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+        ),
+      )
+          :
+      //Listener  ( child:
+      GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: _currentPosition,
+        onMapCreated: (GoogleMapController controller) {
+          _setStyle(controller);
+          _controller.complete(controller);
+          LatLngBounds _cameraTargetBounds;
 
+          setMapPins();
+          _getUserLocation(); // setPolylines() will be called inside this method
+        },
+        onCameraMoveStarted: () {
+          print("camera moving");
+        },
+        onCameraMove: (position) {
+          _destinationPin = position.target;
+          pinDrop = position.target;
+          print('${position.target}');
+        },
+        onCameraIdle: () async {
+          setMapPins(); // Update the destination pin with the new location
+          await setPolylines(); // Recalculate the route
+          await _goToDestination(); // Move the camera view to the destination
+        },
+        onTap: (LatLng location) async {
+          _destinationPin = location; // 更新目的地位置
+          updateMapPins(location); // 更新地图上的标记
+          await setPolylines(); // 重新计算路径
+          await _goToDestination(); // 将相机视角移动到目的地
+          bool _scrollGesturesEnabled = false;
+          bool _tiltGesturesEnabled = false;
+          bool _rotateGesturesEnabled = false;
+        },
 
-              setMapPins();
-              _getUserLocation(); // setPolylines() will be called inside this method
-            },
-            onCameraMoveStarted: () {
-              print("camera moving");
-            },
-            onCameraMove: (position) {
-              _destinationPin = position.target;
-              pinDrop = position.target;
-              print('${position.target}');
-            },
-            onCameraIdle: () async {
-              setMapPins(); // Update the destination pin with the new location
-              await setPolylines(); // Recalculate the route
-              await _goToDestination(); // Move the camera view to the destination
-            },
-            onTap: (LatLng location) async {
+        zoomGesturesEnabled: true,
+        scrollGesturesEnabled: widget.scrollGesturesEnabled,
+        tiltGesturesEnabled: widget.tiltGesturesEnabled,
+        rotateGesturesEnabled: widget.rotateGesturesEnabled,
+        markers: _markers,
+        polylines: _polylines,
+        myLocationButtonEnabled: false,
+        myLocationEnabled: true,
+        mapToolbarEnabled: true,
+      )
 
-              _destinationPin = location; // 更新目的地位置
-              updateMapPins(location); // 更新地图上的标记
-              await setPolylines(); // 重新计算路径
-              await _goToDestination(); // 将相机视角移动到目的地
-            },
+      ,
 
+      //),
 
-
-
-
-          zoomGesturesEnabled:
-    true
-    ,
-    markers: _markers,
-    polylines: _polylines,
-    myLocationButtonEnabled: false,
-    myLocationEnabled: true,
-    mapToolbarEnabled: true,
-    )
-    ,
-
-    //),
-
-    //floatingActionButton: FloatingActionButton(
-    //onPressed: () => _goToMe(),
-    //child: Icon(Icons.my_location),
-    //backgroundColor: Color.fromRGBO(255, 242, 0, 1.0)));
-    //return new Scaffold();}
+      //floatingActionButton: FloatingActionButton(
+      //onPressed: () => _goToMe(),
+      //child: Icon(Icons.my_location),
+      //backgroundColor: Color.fromRGBO(255, 242, 0, 1.0)));
+      //return new Scaffold();}
     );
   }
 
@@ -1522,7 +1601,8 @@ class MapScreen extends State<TheMap> {
       _polylines.clear(); // Clear the previous polylines
       String apiKey = "AIzaSyDsPh6P9PDFmOqxBiLXpzJ1sW4kx-2LN5g";
       PolylinePoints polylinePoints = PolylinePoints();
-      List<PointLatLng> result = await polylinePoints.getRouteBetweenCoordinates(
+      List<PointLatLng> result = await polylinePoints
+          .getRouteBetweenCoordinates(
           apiKey,
           _initialPosition.latitude,
           _initialPosition.longitude,
@@ -1568,6 +1648,13 @@ class MapScreen extends State<TheMap> {
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
           target: LatLng(_destinationPin.latitude, _destinationPin.longitude),
           zoom: 14.47)));
+      setState(() {
+        _scrollGesturesEnabled = false;
+        _tiltGesturesEnabled = false;
+        _rotateGesturesEnabled = false;
+      });
+
+      print("Destination is not set.");
     }
   }
 
