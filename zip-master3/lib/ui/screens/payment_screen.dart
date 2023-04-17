@@ -356,11 +356,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Future<void> _checkPayment() async {
-    print("TEST: was this called?");
+    print("checkPayment() called");
     DocumentSnapshot snapshot = await widget.paymentService.checkPaymentAdded();
-    print("TEST: Snapshot: ${snapshot.data()}");
+    print("checkPayment snapshot: ${snapshot.data()}");
     if (snapshot.data()['error'] == null) {
-      print("TEST: DID I REACH HERE?");
+      print("no error in snapshot data");
       Navigator.of(context).pop();
       _addPaymentMethodDialog();
     } else {
@@ -373,12 +373,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   Future<void> _checkPaymentValidation(docID) async {
-    print("TEST: was this called?");
+    print("checkPaymentValidation() called");
     DocumentSnapshot snapshot =
         await widget.paymentService.validatePayment(docID);
-    print("TEST: Snapshot: ${snapshot.data()}");
+    print("snapshot data: ${snapshot.data()}");
     if (snapshot.data()['error'] == null) {
-      print("TEST: DID I REACH HERE?");
+      print("no error in snapshot data");
       Navigator.of(context).pop();
       Navigator.of(context).pop();
       _validatePaymentDialog();

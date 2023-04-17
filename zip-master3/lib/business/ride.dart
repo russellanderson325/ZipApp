@@ -27,6 +27,7 @@ class RideService {
   GeoFirePoint pickup;
   Function updateUI;
   bool removeRide;
+  double pickupRadius; 
 
   String rideID;
 
@@ -44,7 +45,6 @@ class RideService {
   }
 
   RideService._internal() {
-    // print("I NEED TO GET INTO THIS FUNCTION HOW THE FUCK DO I");
     print("RideService Created");
 //    rideReference = _firestore.collection('rides').doc(userService.userID);
     rideReference = _firestore.collection('rides').doc();
@@ -69,9 +69,7 @@ class RideService {
     rideSubscription = rideStream.listen(
         _onRideUpdate); // Listen to changes in ride Document and update service
     int timesSearched = 0;
-    // OG
-    // replace hard coded radius with radius from firestore
-    double radius = 50;
+    double radius = 1; 
     isSearchingForRide = true;
     goToNextDriver = false;
 
@@ -97,9 +95,9 @@ class RideService {
       } else {
         timesSearched += 1;
         radius += 10;
-        if (showDebugPrints)
-          print(
-              "No Drivers Found after $timesSearched tries, setting radius to $radius");
+        if (showDebugPrints) {
+          print("No Drivers Found after $timesSearched tries, setting radius to $radius");
+        }
         if (timesSearched > 5) {
           isSearchingForRide = false;
         } else {
@@ -172,6 +170,14 @@ class RideService {
     goToNextDriver = false;
   }
 
+  void _retrievePickupRadius() async { 
+    // pickup radius is retrieved from config settings in firestore
+    // double check with sponsors as to how the pickup radius should be implemented
+    DocumentReference adminSettingsRef = _firestore.collection('config_settings').doc('admin_settings'); 
+    pickupRadius = (await adminSettingsRef.get()).get('PickupRadius').toDouble(); 
+    print('Pickup Radius retrieved from admin settings: $pickupRadius'); 
+  }  
+
   // This method is attached to the ride stream and run every time the ride document in firestore changes.
   // Use it to keep the UI state in sync and the local Ride object updated.
   void _onRideUpdate(Ride updatedRide) {
@@ -223,7 +229,6 @@ class RideService {
             "Updated ride status from ${ride.status} to ${updatedRide.status}");
     }
   }
-
 
   Future<void> _initializeRideInFirestore(double lat, double long) async {
     destination = geo.point(latitude: lat, longitude: long);

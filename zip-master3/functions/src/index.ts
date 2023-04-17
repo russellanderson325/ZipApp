@@ -794,18 +794,16 @@ exports.driverEndBreak = functions.https.onCall(async (data, context) =>  {
   }
 })
 
-exports.calculateCost = functions.https.onCall((data, context) => {
+exports.calculateCost = functions.https.onCall(async (data, context) => {
   var miles = data.miles; 
   var zipXL = data.zipXL //true, false
   var customerRequests = data.customerRequests;
-<<<<<<< HEAD
-=======
   // -----------------------------------------------------------------------------------
   // not sure which variable the admin setting "price multiplier" is supposed to replace
   // pull from database but not sure where to put it:
-  //  var priceMultiplier = (await admin.firestore().collection("config_settings").doc("admin_settings").get()).get('PriceMultiplier');
->>>>>>> 0609ec2 (after ride ends, ride id is added to driver list of past drives and ride list of past rides)
+  var priceMultiplier = (await admin.firestore().collection("config_settings").doc("admin_settings").get()).get('PriceMultiplier');
 
+  // ------------------------------------------------------------------------------------
   var xlMultiplier =2;
   var multiplier = 4;
   var milesMultiplier = miles*0.5;
