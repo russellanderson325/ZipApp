@@ -1166,6 +1166,14 @@ class _MainScreenState extends State<MainScreen> {
                   MaterialPageRoute(builder: (context) => SettingsScreen()));
             },
           ),
+          ListTile(
+            title: Text('Log Out'),
+            onTap: () {
+              _logOut();
+              _scaffoldKey.currentState.openEndDrawer();
+              Navigator.of(context).pushNamed("/root");
+            },
+          ),
           Align(
             alignment: Alignment.bottomLeft,
             child: Switch(
