@@ -100,6 +100,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Center(
+                  child: CustomTextButton(
+                title: "Sign in With Phone and Code",
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
+                textColor: Colors.black,
+                color: Color.fromRGBO(252, 242, 0, 1.0),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/phonesignin");
+                },
+                splashColor: Colors.black12,
+                borderColor: Colors.black12,
+                borderWidth: 12.0,
+              ))),
         ],
       ),
     );

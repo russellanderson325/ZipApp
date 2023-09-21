@@ -33,7 +33,7 @@ dependencies:
   firebase_storage: ^4.0.1
   flutter_polyline_points: ^0.1.0
   maps_launcher: ^1.2.0
-  webview_flutter: ^0.3.19+9
+  webview_flutter: ^0.3.14
   geoflutterfire: ^2.1.0
   stripe_payment: ^1.0.10
   stripe: 
@@ -50,6 +50,9 @@ dependencies:
   material_design_icons_flutter: ^4.0.5855
   flutter_speed_dial: ^2.1.1
   geocoding: ^1.0.5
+  country_picker: ^1.1.4 
+  flutter_emoji: ^2.3.0
+  pinput: ^1.0.0
   
 
 
