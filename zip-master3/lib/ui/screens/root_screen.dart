@@ -60,6 +60,7 @@ class _RootScreenState extends State<RootScreen> {
                 return _buildWaitingScreen();
                 break;
               case LoadingState.done:
+                //If this is MainScreen(), basically automatically logs in the user if they logged in before
                 return MainScreen();
                 break;
               default:

@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:zip/ui/screens/documents_screen.dart';
+import 'package:zip/ui/screens/add_phone_auth_screen.dart';
 import 'package:zip/ui/screens/profile_screen.dart';
 import 'package:zip/ui/screens/defaultTip_screen.dart';
 import 'package:zip/ui/screens/legalInfo_screen.dart';
@@ -154,6 +155,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           MaterialPageRoute(
                               builder: (context) => LegalInformationScreen()));
                     }),
+              ),
+              SettingRec(
+                child: ListTile(
+                  leading: Icon(
+                    Icons.phone,
+                    size: 28.0,
+                    color: Color.fromRGBO(255, 242, 0, 1.0),
+                  ),
+                  title: const Text(
+                    "Add Phone Authentication",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Color.fromRGBO(252, 242, 0, 1.0),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: "Bebas",
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddPhoneAuthScreen()),
+                    );
+                  },
+                ),
               ),
               SettingRec(
                 child: ListTile(

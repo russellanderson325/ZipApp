@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:zip/models/user.dart';
 import 'package:flutter/services.dart';
+import 'package:zip/ui/screens/sms_pin_screen.dart';
 
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
@@ -12,6 +14,13 @@ class AuthService {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  bool _isLoading;
+  bool get isLoading => _isLoading;
+
+  String _uid;
+  String get uid => _uid;
+
   // FirebaseFirestore firestore = FirebaseFirestore.instance;
   //final Fires
   Stream<auth.User> get user => _auth.authStateChanges();
@@ -71,6 +80,72 @@ class AuthService {
         break;
     }
     return facebookLoginResult;
+  }
+
+  Future<void> phoneAuthentication(
+      String number, BuildContext context, bool newUser) async {
+    await _auth.verifyPhoneNumber(
+      phoneNumber: number,
+
+      //Android Only!
+      verificationCompleted: (auth.PhoneAuthCredential credential) async {
+        await _auth.currentUser.linkWithCredential(credential);
+      },
+      verificationFailed: (auth.FirebaseAuthException e) {
+        if (e.code == 'invalid-phone-number') {
+          print("Invalid phone number provided");
+        }
+      },
+      codeSent: (String verificationId, int resendToken) async {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => new SmsPinScreen(
+                      verificationId: verificationId,
+                      isNewUser: newUser,
+                    )));
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        print("Did not auto retrieve sms code within 30 seconds");
+      },
+    );
+  }
+
+  //Only called when the otp is not automatically verified by the phone,
+  //which only occurs on some Android devices.
+  void verifyOtpForAddingPhoneAuth({
+    BuildContext context,
+    String verificationId,
+    String otp,
+    Function onSuccess,
+  }) async {
+    try {
+      auth.PhoneAuthCredential credential = auth.PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: otp);
+
+      await _auth.currentUser.linkWithCredential(credential);
+      onSuccess();
+    } on auth.FirebaseAuthException catch (e) {
+      print(e.message.toString());
+    }
+  }
+
+  void verifyOtpForLogin({
+    BuildContext context,
+    String verificationId,
+    String otp,
+    Function onSuccess,
+  }) async {
+    try {
+      auth.PhoneAuthCredential credential = auth.PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: otp);
+
+      final user = (await _auth.signInWithCredential(credential)).user;
+      updateUserData(user);
+      onSuccess();
+    } on auth.FirebaseAuthException catch (e) {
+      print(e.message.toString());
+    }
   }
 
   Future<String> signIn(String email, String password) async {
@@ -144,5 +219,28 @@ class AuthService {
     } else {
       return 'Unknown error occured.';
     }
+  }
+
+  Future<bool> userExists() async {
+    DocumentSnapshot snapshot = await _db.collection("users").doc(_uid).get();
+
+    if (snapshot.exists) {
+      print("User exists!");
+      return true;
+    } else {
+      print("User does not exist");
+      return false;
+    }
+  }
+
+  Future<bool> phoneNumberExists(String phoneNumber) async {
+    Query queryPhoneNumber =
+        _db.collection("users").where("phone", isEqualTo: phoneNumber);
+
+    QuerySnapshot snapshot = await queryPhoneNumber.get();
+    if (snapshot.docs.isNotEmpty) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:zip/ui/screens/phone_login_screen.dart';
 import 'package:zip/ui/screens/profile_screen.dart';
 import 'package:zip/ui/screens/root_screen.dart';
 import 'package:zip/ui/screens/sign_in_screen.dart';
 import 'package:zip/ui/screens/sign_up_screen.dart';
 import 'package:zip/ui/screens/main_screen.dart';
+import 'package:zip/ui/screens/sms_pin_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         '/signup': (BuildContext context) => SignUpScreen(),
         '/main': (BuildContext context) => MainScreen(),
         '/profile': (BuildContext context) => ProfileScreen(),
+        'smspinscreen': (BuildContext context) => SmsPinScreen(),
+        '/phonesignin': (BuildContext context) => PhoneLoginScreen(),
       },
       theme: ThemeData(
         primaryColor: Colors.white,
